@@ -1,0 +1,226 @@
+* {
+  box-sizing: border-box;
+}
+
+.courses-page {
+  width: 100%;
+  max-width: 100%;
+  overflow: visible;
+  padding-bottom: 20px;
+}
+
+/* HEADER */
+.course-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+/* TITLE */
+.course-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  color: white;
+}
+
+/* CREATE BUTTON */
+.course-create-btn {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  border: none;
+  padding: 12px 18px;
+  border-radius: 12px;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.course-create-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* GRID */
+.course-list {
+  display: grid;
+  gap: 18px;
+  overflow: visible;
+}
+
+/* CARD */
+.course-card {
+  background: #1e293b;
+  padding: 18px;
+  border-radius: 14px;
+  transition: 0.3s ease;
+  overflow: hidden;
+}
+
+.course-card:hover {
+  background: #273449;
+  transform: translateY(-3px) scale(1.01);
+}
+
+/* IMAGE */
+.course-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+/* TEXT */
+.course-card h3 {
+  margin: 0;
+  color: white;
+}
+
+.course-card p {
+  color: #94a3b8;
+  margin: 6px 0;
+  line-height: 1.5;
+}
+
+/* STUDENT BUTTON */
+.view-btn {
+  margin-top: 10px;
+  padding: 8px 14px;
+  background: #38bdf8;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+/* TEACHER BUTTONS */
+.admin-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.admin-buttons button {
+  flex: 1;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+/* EDIT */
+.admin-buttons button:first-child {
+  background: #3b82f6;
+}
+
+/* DELETE */
+.admin-buttons button:last-child {
+  background: #ef4444;
+}
+
+/* POPUP */
+.form-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.form-box form {
+  background: #0f172a;
+  padding: 25px;
+  border-radius: 12px;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-box input {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+}
+
+/* BUTTON GROUP */
+.btn-group {
+  display: flex;
+  gap: 10px;
+}
+
+.post-btn {
+  flex: 1;
+  padding: 10px;
+  background: #22c55e;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  flex: 1;
+  padding: 10px;
+  background: #475569;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .course-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .course-header h2 {
+    font-size: 20px;
+  }
+
+  .course-create-btn {
+    width: auto;
+    height: 36px;
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  .course-card {
+    padding: 14px;
+  }
+
+  .course-card h3 {
+    font-size: 16px;
+  }
+
+  .course-card p {
+    font-size: 13px;
+  }
+
+  .admin-buttons {
+    flex-direction: column;
+  }
+
+  .admin-buttons button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,62 @@
+/* PAGE WRAPPER */
+.page {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+  color: white;
+}
+
+/* HEADER */
+.page-header {
+  margin-bottom: 25px;
+}
+
+.page-header h1 {
+  font-size: 28px;
+}
+
+/* GRID */
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+/* EMPTY TEXT */
+.empty {
+  color: #94a3b8;
+  font-size: 16px;
+}
+
+/* 🔥 MODAL */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal {
+  background: #1e293b;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  color: white;
+  width: 300px;
+}
+
+.modal button {
+  margin-top: 15px;
+  padding: 8px 15px;
+  border: none;
+  background: #3b82f6;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}

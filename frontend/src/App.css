@@ -1,0 +1,208 @@
+/* =========================
+   GLOBAL RESET
+========================= */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #0f172a;
+  font-family: sans-serif;
+  overflow-x: hidden;
+}
+
+/* =========================
+   APP LAYOUT (IMPORTANT)
+========================= */
+/* =========================
+   LAYOUT FIX (IMPORTANT)
+========================= */
+
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* MAIN CONTENT DESKTOP */
+.main {
+  flex: 1;
+  min-width: 0;
+
+  margin-left: 240px;
+  padding: 24px;
+
+  transition: margin-left 0.3s ease;
+  background: #0f172a;
+}
+
+/* WHEN SIDEBAR COLLAPSED */
+.sidebar.collapsed ~ .main {
+  margin-left: 80px;
+}
+
+/* =========================
+   LOGIN PAGE FIX
+========================= */
+
+.login-page {
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-left: 0 !important;
+  padding: 0 !important;
+}
+
+/* =========================
+   MOBILE FIX (NO SQUEEZE)
+========================= */
+
+@media (max-width: 768px) {
+  .main {
+    margin-left: 0;
+    padding: 16px;
+  }
+}
+
+/* FULL SCREEN (LOGIN ETC) */
+.main.full {
+  margin-left: 0;
+}
+
+/* =========================
+   PAGE SYSTEM (NO DOUBLE PADDING BUG)
+========================= */
+
+.page,
+.dashboard,
+.student-dashboard,
+.assignments,
+.courses-page,
+.channels-page {
+  width: 100%;
+  max-width: 100%;
+  color: white;
+  padding: 0; /* IMPORTANT FIX */
+}
+
+/* =========================
+   TYPOGRAPHY (UNIFORM SIZE SYSTEM)
+========================= */
+
+h1 {
+  font-size: 28px;
+  margin: 0 0 10px 0;
+}
+
+h2 {
+  font-size: 24px;
+  margin: 0 0 8px 0;
+}
+
+h3 {
+  font-size: 18px;
+  margin: 0 0 6px 0;
+}
+
+h4 {
+  font-size: 16px;
+  margin: 0 0 4px 0;
+}
+
+p {
+  color: #94a3b8;
+  margin: 0;
+  font-size: 14px;
+}
+
+/* =========================
+   CARDS GLOBAL
+========================= */
+
+.card,
+.course-card,
+.assignment-card,
+.channel-card,
+.student-channel-card,
+.box {
+  background: #1e293b;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+/* =========================
+   GRID SYSTEM
+========================= */
+
+.stats,
+.grid,
+.charts,
+.channel-grid,
+.courses-grid,
+.assignment-grid {
+  display: grid;
+  gap: 16px;
+}
+
+/* =========================
+   BUTTON RESET
+========================= */
+
+button {
+  cursor: pointer;
+  border: none;
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+  .main {
+    margin-left: 72px;
+    padding: 16px;
+  }
+
+  .sidebar:not(.collapsed) ~ .main {
+    margin-left: 220px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  h3 {
+    font-size: 15px;
+  }
+
+  p {
+    font-size: 12px;
+  }
+
+  .stats,
+  .grid,
+  .charts,
+  .channel-grid,
+  .courses-grid,
+  .assignment-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card,
+  .course-card,
+  .assignment-card,
+  .channel-card,
+  .student-channel-card,
+  .box {
+    padding: 12px;
+  }
+}

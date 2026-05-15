@@ -1,0 +1,163 @@
+.assignments {
+  margin-left: 75px;
+  padding: 25px;
+  color: white;
+}
+
+/* HEADER */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+
+/* TITLE */
+.page-header h1 {
+  font-size: 28px;
+}
+
+/* ADD BUTTON */
+.add-assignment-btn {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+/* TABS */
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.tabs button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #1e293b;
+  color: white;
+  cursor: pointer;
+}
+
+.tabs .active {
+  background: #38bdf8;
+  color: black;
+}
+
+/* FORM BOX (BOTH TEACHER + STUDENT) */
+.form-box {
+  background: #0f172a;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.form-box input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #1e293b;
+  color: white;
+}
+
+/* BUTTON GROUP */
+.btn-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.post-btn {
+  background: #22c55e;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background: #ef4444;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
+
+/* CARD */
+.assignment-card {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.due-date {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* OPEN BUTTON */
+.open-btn {
+  margin-top: 10px;
+  background: #38bdf8;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* DELETE */
+.delete-btn {
+  background: #ef4444;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
+
+/* SUBMITTED */
+.submitted {
+  color: #22c55e;
+  margin-top: 10px;
+}
+
+/* RESPONSIVE (same as your old style, NOT CHANGED DESIGN) */
+@media (max-width: 768px) {
+  .assignments {
+    margin-left: 0;
+    padding: 15px;
+  }
+
+  .page-header h1 {
+    font-size: 22px;
+  }
+
+  .assignment-card {
+    padding: 12px;
+  }
+
+  .tabs button {
+    font-size: 12px;
+  }
+
+  .form-box input {
+    font-size: 13px;
+  }
+}

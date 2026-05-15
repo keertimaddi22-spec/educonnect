@@ -7,6 +7,7 @@ function Attendance() {
   const today = new Date().toISOString().split("T")[0];
 
   const [marked, setMarked] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // ✅ CHECK IF ALREADY MARKED
   useEffect(() => {
@@ -26,7 +27,7 @@ function Attendance() {
           setMarked(true);
         }
       } catch (err) {
-        console.log(err);
+        console.log("CHECK ERROR 👉", err);
       }
     };
 
@@ -36,6 +37,8 @@ function Attendance() {
   // ✅ MARK PRESENT
   const markPresent = async () => {
     try {
+      setLoading(true);
+
       const res = await fetch(
         "https://educonnect-q5og.onrender.com/api/attendance",
         {
@@ -54,14 +57,17 @@ function Attendance() {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.message);
+        alert(data.message || "Failed ❌");
+        setLoading(false);
         return;
       }
 
       setMarked(true);
+      setLoading(false);
     } catch (err) {
-      console.log(err);
+      console.log("MARK ERROR 👉", err);
       alert("Server error ❌");
+      setLoading(false);
     }
   };
 
@@ -70,8 +76,8 @@ function Attendance() {
       <h2>📅 Today: {today}</h2>
 
       {!marked ? (
-        <button className="mark-btn" onClick={markPresent}>
-          Mark Present
+        <button className="mark-btn" onClick={markPresent} disabled={loading}>
+          {loading ? "Marking..." : "Mark Present"}
         </button>
       ) : (
         <p className="done">✔ Attendance Marked</p>

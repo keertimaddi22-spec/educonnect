@@ -19,10 +19,7 @@
 
 /* TITLE */
 .course-header h2 {
-  font-size: 2rem;
   font-weight: 700;
-  margin: 0;
-  color: white;
 }
 
 /* CREATE BUTTON */
@@ -191,10 +188,6 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
-  }
-
-  .course-header h2 {
-    font-size: 20px;
   }
 
   .course-create-btn {

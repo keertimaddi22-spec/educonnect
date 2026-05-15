@@ -140,3 +140,8 @@
 .student-cancel-btn {
   background: #475569;
 }
+@media (max-width: 768px) {
+  .student-assignments-header h1 {
+    font-size: 18px;
+  }
+}

@@ -88,7 +88,7 @@ function Assignments() {
   return (
     <div className="assignments">
       <div className="page-header">
-        <h1>Assignments 📝</h1>
+        <h2>Assignments 📝</h2>
 
         {role === "teacher" && (
           <button

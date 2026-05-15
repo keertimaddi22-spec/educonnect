@@ -18,9 +18,8 @@ function Assignments() {
   const [selectedAssignment, setSelectedAssignment] = useState(null);
   const [answer, setAnswer] = useState("");
 
-  // FETCH (TEACHER + STUDENT COMMON)
   const fetchAssignments = () => {
-    fetch("http://localhost:5000/api/assignments")
+    fetch("https://educonnect-q5og.onrender.com/api/assignments")
       .then((res) => res.json())
       .then((data) => setAssignments(data));
   };
@@ -30,13 +29,12 @@ function Assignments() {
     setSubmissions(JSON.parse(localStorage.getItem("submissions")) || []);
   }, []);
 
-  // ➕ TEACHER ADD
   const handleAdd = async (e) => {
     e.preventDefault();
 
     if (!title || !dueDate) return alert("Fill all fields");
 
-    await fetch("http://localhost:5000/api/assignments", {
+    await fetch("https://educonnect-q5og.onrender.com/api/assignments", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title, dueDate }),
@@ -49,16 +47,14 @@ function Assignments() {
     fetchAssignments();
   };
 
-  // 🗑 DELETE (TEACHER)
   const handleDelete = async (id) => {
-    await fetch(`http://localhost:5000/api/assignments/${id}`, {
+    await fetch(`https://educonnect-q5og.onrender.com/api/assignments/${id}`, {
       method: "DELETE",
     });
 
     fetchAssignments();
   };
 
-  // 📤 SUBMIT (STUDENT - OLD LOGIC)
   const handleSubmit = () => {
     if (!answer.trim()) return alert("Write answer");
 
@@ -69,14 +65,15 @@ function Assignments() {
     };
 
     const updated = [...submissions, newSubmission];
+
     setSubmissions(updated);
+
     localStorage.setItem("submissions", JSON.stringify(updated));
 
     setSelectedAssignment(null);
     setAnswer("");
   };
 
-  // 🔍 FILTER (STUDENT OLD + TEACHER FULL LIST)
   const filteredAssignments = assignments.filter((a) => {
     if (role === "teacher") return true;
 
@@ -90,7 +87,6 @@ function Assignments() {
 
   return (
     <div className="assignments">
-      {/* HEADER */}
       <div className="page-header">
         <h1>Assignments 📝</h1>
 
@@ -104,7 +100,6 @@ function Assignments() {
         )}
       </div>
 
-      {/* STUDENT TABS (OLD SAME) */}
       {role === "student" && (
         <div className="tabs">
           <button
@@ -123,7 +118,6 @@ function Assignments() {
         </div>
       )}
 
-      {/* TEACHER FORM */}
       {showForm && role === "teacher" && (
         <div className="form-box">
           <form onSubmit={handleAdd}>
@@ -159,7 +153,6 @@ function Assignments() {
         </div>
       )}
 
-      {/* STUDENT SUBMIT POPUP (OLD SAME) */}
       {selectedAssignment && role === "student" && (
         <div className="form-box">
           <form
@@ -194,7 +187,6 @@ function Assignments() {
         </div>
       )}
 
-      {/* LIST */}
       {filteredAssignments.map((a) => (
         <div key={a._id} className="assignment-card">
           <div className="card-top">
@@ -202,7 +194,6 @@ function Assignments() {
             <span className="due-date">Due: {a.dueDate}</span>
           </div>
 
-          {/* STUDENT VIEW (OLD SAME) */}
           {role === "student" &&
             !submissions.some(
               (s) => s.assignmentId === a._id && s.student === user,
@@ -220,7 +211,6 @@ function Assignments() {
               (s) => s.assignmentId === a._id && s.student === user,
             ) && <p className="submitted">✅ Submitted</p>}
 
-          {/* TEACHER VIEW (NEW API DELETE) */}
           {role === "teacher" && (
             <button className="delete-btn" onClick={() => handleDelete(a._id)}>
               🗑 Delete

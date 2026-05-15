@@ -9,15 +9,17 @@ function ChannelChat() {
 
   const user = localStorage.getItem("user");
   const navigate = useNavigate();
+
   const [channel, setChannel] = useState(null);
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/channels")
+    fetch("https://educonnect-q5og.onrender.com/api/channels")
       .then((res) => res.json())
       .then((data) => {
         const found = data.find((c) => c._id === id);
+
         setChannel(found);
         setMessages(found?.messages || []);
       });
@@ -40,7 +42,6 @@ function ChannelChat() {
 
   return (
     <div className="chat-page">
-      {/* HEADER */}
       <div className="chat-header">
         <div className="back-circle" onClick={() => navigate(-1)}>
           <FiArrowLeft />
@@ -55,7 +56,6 @@ function ChannelChat() {
         </div>
       </div>
 
-      {/* BODY */}
       <div className="chat-body">
         {messages.map((m, i) => (
           <div key={i} className={`msg ${m.sender === user ? "own" : ""}`}>
@@ -64,13 +64,13 @@ function ChannelChat() {
         ))}
       </div>
 
-      {/* INPUT */}
       <div className="chat-input">
         <input
           placeholder="Type message..."
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
+
         <button onClick={sendMessage}>Send</button>
       </div>
     </div>

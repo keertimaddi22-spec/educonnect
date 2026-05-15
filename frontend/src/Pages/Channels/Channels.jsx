@@ -14,7 +14,7 @@ function Channels() {
   const [newChannel, setNewChannel] = useState("");
 
   const fetchChannels = () => {
-    fetch("http://localhost:5000/api/channels")
+    fetch("https://educonnect-q5og.onrender.com/api/channels")
       .then((res) => res.json())
       .then((data) => setChannels(data));
   };
@@ -26,7 +26,7 @@ function Channels() {
   const handleSave = async () => {
     if (!newChannel.trim()) return;
 
-    await fetch("http://localhost:5000/api/channels/create", {
+    await fetch("https://educonnect-q5og.onrender.com/api/channels/create", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -41,18 +41,20 @@ function Channels() {
   };
 
   const handleRequest = async (id) => {
-    await fetch(`http://localhost:5000/api/channels/request/${id}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ student: user }),
-    });
+    await fetch(
+      `https://educonnect-q5og.onrender.com/api/channels/request/${id}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ student: user }),
+      },
+    );
 
     fetchChannels();
   };
 
   return (
     <div className="channels-page">
-      {/* HEADER */}
       <div className="channels-header">
         <h2>Channels</h2>
 
@@ -67,7 +69,6 @@ function Channels() {
         )}
       </div>
 
-      {/* POPUP */}
       {showInput && role === "teacher" && (
         <div className="popup-overlay" onClick={() => setShowInput(false)}>
           <div className="popup-box" onClick={(e) => e.stopPropagation()}>
@@ -87,7 +88,6 @@ function Channels() {
         </div>
       )}
 
-      {/* GRID */}
       <div className="channel-grid">
         {channels.map((c) => {
           const request = c.requests?.find((r) => r.student === user);

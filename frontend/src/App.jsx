@@ -16,7 +16,7 @@ import TeacherAssignments from "./Pages/TeacherDashboard/TeacherAssignments";
 
 import Attendance from "./Pages/Attendance/Attendance";
 
-import Sidebar from "./Components/Sidebar/Sidebar";
+import Sidebar from "./Components/Sidebar/Sidebar.jsx";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 
 import Channels from "./Pages/Channels/Channels";

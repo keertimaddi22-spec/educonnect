@@ -16,7 +16,7 @@ router.post("/register", async (req, res) => {
   // ✅ TEACHER EMAIL VALIDATION
   if (role === "teacher" && !email.endsWith("@teacher.com")) {
     return res.status(400).json({
-      message: "Teacher must use @teacher.com email ❌",
+      message: "Please check the Email and the Role selected",
     });
   }
 

@@ -27,7 +27,7 @@ import "./App.css";
 function Layout() {
   const location = useLocation();
 
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(window.innerWidth <= 768);
 
   const user = localStorage.getItem("user");
   const role = localStorage.getItem("role");

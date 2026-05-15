@@ -13,19 +13,34 @@ router.post("/register", async (req, res) => {
 
   const { name, email, password, role } = req.body;
 
+  // ✅ TEACHER EMAIL VALIDATION
+  if (role === "teacher" && !email.endsWith("@teacher.com")) {
+    return res.status(400).json({
+      message: "Teacher must use @teacher.com email ❌",
+    });
+  }
+
   try {
+    // ✅ EMPTY CHECK
     if (!name || !email || !password || !role) {
-      return res.status(400).json({ message: "All fields required ❌" });
+      return res.status(400).json({
+        message: "All fields required ❌",
+      });
     }
 
+    // ✅ DUPLICATE CHECK
     const exists = await User.findOne({ email });
 
     if (exists) {
-      return res.status(400).json({ message: "User already exists ❌" });
+      return res.status(400).json({
+        message: "User already exists ❌",
+      });
     }
 
+    // ✅ HASH PASSWORD
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // ✅ CREATE USER
     const user = await User.create({
       name,
       email,
@@ -39,7 +54,10 @@ router.post("/register", async (req, res) => {
     });
   } catch (error) {
     console.log("REGISTER ERROR 👉", error);
-    res.status(500).json({ message: "Server error ❌" });
+
+    res.status(500).json({
+      message: "Server error ❌",
+    });
   }
 });
 
@@ -52,24 +70,37 @@ router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   try {
+    // ✅ FIND USER
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(400).json({ message: "User not found ❌" });
+      return res.status(400).json({
+        message: "User not found ❌",
+      });
     }
 
+    // ✅ CHECK PASSWORD
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      return res.status(400).json({ message: "Wrong password ❌" });
+      return res.status(400).json({
+        message: "Wrong password ❌",
+      });
     }
 
+    // ✅ JWT TOKEN
     const token = jwt.sign(
-      { id: user._id, role: user.role },
+      {
+        id: user._id,
+        role: user.role,
+      },
       "secretkey",
-      { expiresIn: "7d" }
+      {
+        expiresIn: "7d",
+      },
     );
 
+    // ✅ SUCCESS RESPONSE
     res.json({
       message: "Login success ✅",
       token,
@@ -77,7 +108,10 @@ router.post("/login", async (req, res) => {
     });
   } catch (error) {
     console.log("LOGIN ERROR 👉", error);
-    res.status(500).json({ message: "Server error ❌" });
+
+    res.status(500).json({
+      message: "Server error ❌",
+    });
   }
 });
 

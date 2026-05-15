@@ -1,43 +1,51 @@
 import express from "express";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
 const router = express.Router();
 
-// 🔥 REGISTER
+// =======================
+// REGISTER
+// =======================
 router.post("/register", async (req, res) => {
-  console.log("BODY 👉", req.body); // DEBUG
+  console.log("REGISTER BODY 👉", req.body);
 
   const { name, email, password, role } = req.body;
 
   try {
-    // ❌ EMPTY CHECK
     if (!name || !email || !password || !role) {
       return res.status(400).json({ message: "All fields required ❌" });
     }
 
-    // ❌ DUPLICATE CHECK
     const exists = await User.findOne({ email });
+
     if (exists) {
       return res.status(400).json({ message: "User already exists ❌" });
     }
 
-    // ✅ CREATE USER
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const user = await User.create({
       name,
       email,
-      password,
+      password: hashedPassword,
       role,
     });
 
-    res.status(201).json({ message: "Registered ✅", user });
+    res.status(201).json({
+      message: "Registered successfully ✅",
+      user,
+    });
   } catch (error) {
-    console.log("ERROR 👉", error); // 🔥 IMPORTANT
+    console.log("REGISTER ERROR 👉", error);
     res.status(500).json({ message: "Server error ❌" });
   }
 });
 
-// 🔐 LOGIN
+// =======================
+// LOGIN
+// =======================
 router.post("/login", async (req, res) => {
   console.log("LOGIN BODY 👉", req.body);
 
@@ -46,22 +54,29 @@ router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ email });
 
-    console.log("FOUND USER 👉", user);
-
     if (!user) {
       return res.status(400).json({ message: "User not found ❌" });
     }
 
-    if (user.password !== password) {
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
       return res.status(400).json({ message: "Wrong password ❌" });
     }
 
+    const token = jwt.sign(
+      { id: user._id, role: user.role },
+      "secretkey",
+      { expiresIn: "7d" }
+    );
+
     res.json({
       message: "Login success ✅",
+      token,
       user,
     });
   } catch (error) {
-    console.log("ERROR 👉", error);
+    console.log("LOGIN ERROR 👉", error);
     res.status(500).json({ message: "Server error ❌" });
   }
 });

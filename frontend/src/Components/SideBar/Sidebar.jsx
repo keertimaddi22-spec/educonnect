@@ -13,11 +13,11 @@ import {
 
 import "./Sidebar.css";
 
-function Sidebar() {
+function Sidebar({ collapsed, setCollapsed }) {
   const navigate = useNavigate();
 
   // ✅ MOBILE PE DEFAULT COLLAPSED
-  const [collapsed, setCollapsed] = useState(true);
+
   const [search, setSearch] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
 

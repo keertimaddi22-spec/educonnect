@@ -1,9 +1,10 @@
 .assignments {
   padding: 18px;
   color: white;
+  position: relative;
+  z-index: 2;
 }
 
-/* HEADER */
 /* HEADER */
 .page-header h2 {
   font-size: 32px;
@@ -18,6 +19,9 @@
   border-radius: 10px;
   color: white;
   cursor: pointer;
+
+  position: relative;
+  z-index: 1000;
 }
 
 /* TABS */
@@ -41,12 +45,20 @@
   color: black;
 }
 
-/* FORM BOX (BOTH TEACHER + STUDENT) */
+/* FORM BOX */
 .form-box {
   background: #0f172a;
   padding: 20px;
   border-radius: 12px;
   margin-bottom: 20px;
+
+  position: relative;
+  z-index: 9999;
+}
+
+.form-box form {
+  position: relative;
+  z-index: 9999;
 }
 
 .form-box input {
@@ -130,7 +142,7 @@
   margin-top: 10px;
 }
 
-/* RESPONSIVE (same as your old style, NOT CHANGED DESIGN) */
+/* MOBILE */
 @media (max-width: 768px) {
   .assignments {
     margin-left: 0;
@@ -151,5 +163,10 @@
 
   .form-box input {
     font-size: 13px;
+  }
+
+  .form-box {
+    width: 100%;
+    z-index: 99999;
   }
 }

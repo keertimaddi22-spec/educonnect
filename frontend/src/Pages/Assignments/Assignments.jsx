@@ -18,7 +18,7 @@ function Assignments() {
   const [selectedAssignment, setSelectedAssignment] = useState(null);
   const [answer, setAnswer] = useState("");
 
-  // ✅ FETCH
+  // FETCH
   const fetchAssignments = async () => {
     try {
       const res = await fetch(
@@ -42,13 +42,11 @@ function Assignments() {
     setSubmissions(saved);
   }, []);
 
-  // ✅ ADD ASSIGNMENT
+  // ADD ASSIGNMENT
   const handleAdd = async (e) => {
     e.preventDefault();
 
-    if (!title.trim() || !dueDate) {
-      return;
-    }
+    if (!title.trim() || !dueDate) return;
 
     try {
       const res = await fetch(
@@ -81,7 +79,7 @@ function Assignments() {
     }
   };
 
-  // ✅ DELETE
+  // DELETE
   const handleDelete = async (id) => {
     try {
       await fetch(
@@ -97,7 +95,7 @@ function Assignments() {
     }
   };
 
-  // ✅ SUBMIT
+  // SUBMIT
   const handleSubmit = () => {
     if (!answer.trim()) return;
 
@@ -117,7 +115,7 @@ function Assignments() {
     setAnswer("");
   };
 
-  // ✅ FILTER
+  // FILTER
   const filteredAssignments = assignments.filter((a) => {
     if (role === "teacher") return true;
 
@@ -170,8 +168,14 @@ function Assignments() {
 
       {/* CREATE FORM */}
       {showForm && role === "teacher" && (
-        <div className="popup-overlay" onClick={() => setShowForm(false)}>
-          <div className="popup-box" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="assignment-popup-overlay"
+          onClick={() => setShowForm(false)}
+        >
+          <div
+            className="assignment-popup"
+            onClick={(e) => e.stopPropagation()}
+          >
             <h2>Add Assignment</h2>
 
             <form onSubmit={handleAdd}>
@@ -209,10 +213,13 @@ function Assignments() {
       {/* SUBMIT FORM */}
       {selectedAssignment && role === "student" && (
         <div
-          className="popup-overlay"
+          className="assignment-popup-overlay"
           onClick={() => setSelectedAssignment(null)}
         >
-          <div className="popup-box" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="assignment-popup"
+            onClick={(e) => e.stopPropagation()}
+          >
             <h2>{selectedAssignment.title}</h2>
 
             <form

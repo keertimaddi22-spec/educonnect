@@ -297,11 +297,12 @@
 
     background: rgba(15, 23, 42, 0.55); /* blue-dark tint */
     backdrop-filter: blur(6px);
-
-    z-index: 900;
+  }
+  .sidebar {
+    z-index: 99999;
   }
 
-  .sidebar {
-    z-index: 1000;
+  .sidebar-backdrop {
+    z-index: 99998;
   }
 }

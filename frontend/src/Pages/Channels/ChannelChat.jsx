@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +14,8 @@ function ChannelChat() {
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState("");
 
+  const bottomRef = useRef(null);
+
   useEffect(() => {
     fetch("https://educonnect-q5og.onrender.com/api/channels")
       .then((res) => res.json())
@@ -25,6 +27,12 @@ function ChannelChat() {
       });
   }, [id]);
 
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({
+      behavior: "smooth",
+    });
+  }, [messages]);
+
   const sendMessage = () => {
     if (!text.trim()) return;
 
@@ -34,7 +42,8 @@ function ChannelChat() {
       time: new Date().toLocaleTimeString(),
     };
 
-    setMessages([...messages, newMsg]);
+    setMessages((prev) => [...prev, newMsg]);
+
     setText("");
   };
 
@@ -42,6 +51,7 @@ function ChannelChat() {
 
   return (
     <div className="chat-page">
+      {/* HEADER */}
       <div className="chat-header">
         <div className="back-circle" onClick={() => navigate(-1)}>
           <FiArrowLeft />
@@ -51,24 +61,37 @@ function ChannelChat() {
 
         <div className="right">
           <div className="profile-icon">
-            {channel.createdBy?.charAt(0).toUpperCase()}
+            {channel.instructor?.charAt(0).toUpperCase()}
           </div>
         </div>
       </div>
 
+      {/* BODY */}
       <div className="chat-body">
         {messages.map((m, i) => (
           <div key={i} className={`msg ${m.sender === user ? "own" : ""}`}>
+            <div className="msg-sender">{m.sender}</div>
+
             <div className="msg-text">{m.text}</div>
+
+            <div className="msg-time">{m.time}</div>
           </div>
         ))}
+
+        <div ref={bottomRef}></div>
       </div>
 
+      {/* INPUT */}
       <div className="chat-input">
         <input
           placeholder="Type message..."
           value={text}
           onChange={(e) => setText(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              sendMessage();
+            }
+          }}
         />
 
         <button onClick={sendMessage}>Send</button>

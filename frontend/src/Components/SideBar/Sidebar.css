@@ -14,7 +14,7 @@
   justify-content: space-between;
 
   transition: all 0.3s ease;
-  z-index: 9999;
+  z-index: 1000;
 
   overflow-x: hidden;
   overflow-y: auto;
@@ -133,7 +133,8 @@
   background: #0f172a;
   border-radius: 8px;
   overflow: hidden;
-  z-index: 100;
+
+  z-index: 1001;
 }
 
 .dropdown-item {
@@ -236,6 +237,36 @@
   padding: 14px;
 }
 
+/* ================= FIX POPUPS ================= */
+
+.popup-overlay,
+.teacher-modal-overlay,
+.student-modal-overlay,
+.modal-overlay,
+.assignment-popup-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+
+  z-index: 999999 !important;
+}
+
+.popup-box,
+.teacher-form,
+.teacher-details-modal,
+.student-modal,
+.modal,
+.assignment-popup {
+  position: relative !important;
+  z-index: 1000000 !important;
+}
+
 /* ================= MOBILE ================= */
 
 @media (max-width: 768px) {
@@ -262,6 +293,6 @@
     inset: 0;
     background: rgba(2, 6, 23, 0.6);
     backdrop-filter: blur(5px);
-    z-index: 9998;
+    z-index: 999;
   }
 }

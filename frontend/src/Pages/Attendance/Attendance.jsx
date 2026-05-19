@@ -1,74 +1,72 @@
 import { useEffect, useState } from "react";
 import "./Attendance.css";
 
-const API = "https://educonnect-q5og.onrender.com";
-
 function Attendance() {
   const user = localStorage.getItem("user");
 
-  // ✅ MOBILE SAFE DATE
-  const today = new Date().toLocaleDateString("en-CA");
+  const today = new Date().toISOString().split("T")[0];
 
   const [marked, setMarked] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // ✅ CHECK IF ALREADY MARKED
-  useEffect(() => {
-    const checkAttendance = async () => {
-      try {
-        const res = await fetch(`${API}/api/attendance`);
-
-        const data = await res.json();
-
-        const alreadyMarked = data.find(
-          (a) => a.student === user && a.date === today,
-        );
-
-        if (alreadyMarked) {
-          setMarked(true);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    checkAttendance();
-  }, [today, user]);
-
-  // ✅ MARK PRESENT
-  const markPresent = async () => {
-    if (loading) return;
-
-    setLoading(true);
-
+  // ✅ CHECK ATTENDANCE
+  const checkAttendance = async () => {
     try {
-      const res = await fetch(`${API}/api/attendance/mark`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          student: user,
-          date: today,
-          status: "present",
-        }),
-      });
+      const res = await fetch(
+        "https://educonnect-q5og.onrender.com/api/attendance",
+      );
 
       const data = await res.json();
 
-      if (!res.ok) {
-        alert(data.message || "Attendance failed");
-        setLoading(false);
-        return;
-      }
+      const alreadyMarked = data.find(
+        (a) => a.student === user && a.date === today,
+      );
 
-      setMarked(true);
+      if (alreadyMarked) {
+        setMarked(true);
+      } else {
+        setMarked(false);
+      }
     } catch (err) {
       console.log(err);
-      alert("Server error");
     }
+  };
 
-    setLoading(false);
+  useEffect(() => {
+    checkAttendance();
+  }, []);
+
+  // ✅ MARK PRESENT
+  const markPresent = async () => {
+    try {
+      setLoading(true);
+
+      const res = await fetch(
+        "https://educonnect-q5og.onrender.com/api/attendance/mark",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            student: user,
+            date: today,
+            status: "present",
+          }),
+        },
+      );
+
+      await res.json();
+
+      setMarked(true);
+
+      // ✅ refresh check
+      checkAttendance();
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -76,11 +74,11 @@ function Attendance() {
       <h2>📅 Today: {today}</h2>
 
       {!marked ? (
-        <button className="mark-btn" onClick={markPresent}>
+        <button className="mark-btn" onClick={markPresent} disabled={loading}>
           {loading ? "Marking..." : "Mark Present"}
         </button>
       ) : (
-        <p className="done">✔ Attendance Marked</p>
+        <p className="done">✅ Attendance Marked</p>
       )}
     </div>
   );

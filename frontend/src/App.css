@@ -1,36 +1,42 @@
-/* =========================
-   GLOBAL POPUPS FIX
-========================= */
+/* FORCE ALL POPUPS ABOVE SIDEBAR */
 
 .popup-overlay,
+.form-box,
 .assignment-popup-overlay,
-.teacher-modal-overlay,
-.student-modal-overlay {
-  position: fixed;
-  inset: 0;
+.teacher-modal-overlay {
+  position: fixed !important;
+  inset: 0 !important;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(4px);
+  z-index: 999999999 !important;
 
-  z-index: 999999 !important;
+  overflow: hidden !important;
 }
 
-/* POPUP BOXES */
 .popup-box,
+.form-box form,
 .assignment-popup,
 .teacher-form,
-.teacher-details-modal,
-.student-modal,
-.form-box,
-.modal,
-.student-modal,
 .teacher-details-modal {
-  position: relative;
-  z-index: 1000000 !important;
+  position: relative !important;
+  z-index: 999999999 !important;
+}
+
+/* SIDEBAR ALWAYS BELOW */
+.sidebar {
+  z-index: 10 !important;
+}
+
+/* REMOVE PAGE CLIPPING */
+.main,
+.channels-page,
+.courses-page,
+.assignments,
+.dashboard {
+  overflow: visible !important;
 }
 
 .channels-page,

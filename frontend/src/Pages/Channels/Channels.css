@@ -106,23 +106,32 @@
 }
 
 /* POPUP */
+/* POPUP */
 .popup-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.65);
+
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  z-index: 99999;
+  z-index: 20000 !important;
 }
 
 .popup-box {
+  position: relative;
+
   width: 330px;
+  max-width: calc(100vw - 24px);
+
   background: #0f172a;
   padding: 22px;
   border-radius: 16px;
+
+  z-index: 20001 !important;
 }
 
 .popup-box h3 {

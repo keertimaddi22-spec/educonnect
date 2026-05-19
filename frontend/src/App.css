@@ -1,3 +1,38 @@
+/* =========================
+   GLOBAL POPUPS FIX
+========================= */
+
+.popup-overlay,
+.assignment-popup-overlay,
+.teacher-modal-overlay,
+.student-modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+
+  z-index: 999999 !important;
+}
+
+/* POPUP BOXES */
+.popup-box,
+.assignment-popup,
+.teacher-form,
+.teacher-details-modal,
+.student-modal,
+.form-box,
+.modal,
+.student-modal,
+.teacher-details-modal {
+  position: relative;
+  z-index: 1000000 !important;
+}
+
 .channels-page,
 .assignments,
 .dashboard,

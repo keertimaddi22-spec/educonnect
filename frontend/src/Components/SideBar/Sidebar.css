@@ -16,7 +16,7 @@
   transition: all 0.3s ease;
 
   /* FIX */
-  z-index: 100;
+  z-index: 10;
 
   overflow-x: hidden;
   overflow-y: auto;
@@ -266,6 +266,6 @@
     backdrop-filter: blur(5px);
 
     /* FIX */
-    z-index: 90;
+    z-index: 5;
   }
 }

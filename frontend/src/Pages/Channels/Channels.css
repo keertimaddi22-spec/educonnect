@@ -108,21 +108,24 @@
 /* POPUP */
 /* POPUP */
 .popup-overlay {
-  position: fixed;
-  inset: 0;
+  position: fixed !important;
+  inset: 0 !important;
 
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(5px);
+  width: 100vw !important;
+  height: 100dvh !important;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: rgba(0, 0, 0, 0.65);
 
-  z-index: 20000 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+
+  z-index: 999999 !important;
 }
 
 .popup-box {
-  position: relative;
+  position: relative !important;
+  z-index: 999999 !important;
 
   width: 330px;
   max-width: calc(100vw - 24px);
@@ -130,8 +133,6 @@
   background: #0f172a;
   padding: 22px;
   border-radius: 16px;
-
-  z-index: 20001 !important;
 }
 
 .popup-box h3 {

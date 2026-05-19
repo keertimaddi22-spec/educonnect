@@ -36,15 +36,18 @@ function StudentDashboard() {
     if (marked) return;
 
     try {
-      const res = await fetch("http://localhost:5000/api/attendance/mark", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          student: user,
-          date: today,
-          status: "present",
-        }),
-      });
+      const res = await fetch(
+        "https://educonnect-q5og.onrender.com/api/attendance/mark",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            student: user,
+            date: today,
+            status: "present",
+          }),
+        },
+      );
 
       if (res.ok) {
         setMarked(true);
@@ -78,15 +81,15 @@ function StudentDashboard() {
     setAttendance(storedAttendance);
     setSubmissions(storedSubmissions);
 
-    fetch("http://localhost:5000/api/courses")
+    fetch("https://educonnect-q5og.onrender.com/api/courses")
       .then((res) => res.json())
       .then((data) => setCourses(data));
 
-    fetch("http://localhost:5000/api/assignments")
+    fetch("https://educonnect-q5og.onrender.com/api/assignments")
       .then((res) => res.json())
       .then((data) => setAssignments(data));
 
-    fetch("http://localhost:5000/api/channels")
+    fetch("https://educonnect-q5og.onrender.com/api/channels")
       .then((res) => res.json())
       .then((data) => setChannels(data));
 

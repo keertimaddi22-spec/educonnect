@@ -9,7 +9,7 @@ function MyCourses() {
   const user = localStorage.getItem("user");
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/courses")
+    fetch("https://educonnect-q5og.onrender.com/api/courses")
       .then((res) => res.json())
       .then((data) => {
         const filtered = data.filter((course) =>

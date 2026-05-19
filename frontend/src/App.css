@@ -14,18 +14,21 @@
   box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   background: #0f172a;
   font-family: sans-serif;
-  overflow-x: hidden;
 }
 
 /* =========================
-   APP LAYOUT (IMPORTANT)
-========================= */
-/* =========================
-   LAYOUT FIX (IMPORTANT)
+   APP LAYOUT
 ========================= */
 
 .app-layout {
@@ -33,7 +36,7 @@ body {
   min-height: 100vh;
 }
 
-/* MAIN CONTENT DESKTOP */
+/* MAIN CONTENT */
 .main {
   flex: 1;
   min-width: 0;
@@ -43,17 +46,16 @@ body {
 
   transition: margin-left 0.3s ease;
   background: #0f172a;
+
+  overflow-x: hidden;
 }
 
-/* WHEN SIDEBAR COLLAPSED */
+/* COLLAPSED */
 .sidebar.collapsed ~ .main {
   margin-left: 80px;
 }
 
-/* =========================
-   LOGIN PAGE FIX
-========================= */
-
+/* LOGIN PAGE */
 .login-page {
   width: 100%;
   min-height: 100vh;
@@ -66,24 +68,13 @@ body {
   padding: 0 !important;
 }
 
-/* =========================
-   MOBILE FIX (NO SQUEEZE)
-========================= */
-
-@media (max-width: 768px) {
-  .main {
-    margin-left: 0;
-    padding: 16px;
-  }
-}
-
-/* FULL SCREEN (LOGIN ETC) */
+/* FULL WIDTH */
 .main.full {
   margin-left: 0;
 }
 
 /* =========================
-   PAGE SYSTEM (NO DOUBLE PADDING BUG)
+   PAGE SYSTEM
 ========================= */
 
 .page,
@@ -95,31 +86,31 @@ body {
   width: 100%;
   max-width: 100%;
   color: white;
-  padding: 0; /* IMPORTANT FIX */
+  padding: 0;
 }
 
 /* =========================
-   TYPOGRAPHY (UNIFORM SIZE SYSTEM)
+   TYPOGRAPHY
 ========================= */
 
 h1 {
   font-size: 28px;
-  margin: 0 0 10px 0;
+  margin: 0 0 10px;
 }
 
 h2 {
   font-size: 24px;
-  margin: 0 0 8px 0;
+  margin: 0 0 8px;
 }
 
 h3 {
   font-size: 18px;
-  margin: 0 0 6px 0;
+  margin: 0 0 6px;
 }
 
 h4 {
   font-size: 16px;
-  margin: 0 0 4px 0;
+  margin: 0 0 4px;
 }
 
 p {
@@ -129,7 +120,7 @@ p {
 }
 
 /* =========================
-   CARDS GLOBAL
+   CARDS
 ========================= */
 
 .card,
@@ -144,7 +135,7 @@ p {
 }
 
 /* =========================
-   GRID SYSTEM
+   GRIDS
 ========================= */
 
 .stats,
@@ -166,8 +157,114 @@ button {
   border: none;
 }
 
+button,
+input,
+textarea {
+  touch-action: manipulation;
+}
+
 /* =========================
-   MOBILE RESPONSIVE
+   SIDEBAR
+========================= */
+
+.sidebar {
+  z-index: 1000;
+}
+
+/* =========================
+   GLOBAL POPUPS
+========================= */
+
+.popup-overlay,
+.assignment-popup-overlay,
+.teacher-modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+
+  z-index: 999999 !important;
+}
+
+/* POPUP BOX */
+.popup-box,
+.assignment-popup,
+.teacher-form,
+.teacher-details-modal {
+  position: relative;
+
+  width: 90%;
+  max-width: 420px;
+
+  background: #0f172a;
+  color: white;
+
+  border-radius: 16px;
+  padding: 22px;
+
+  z-index: 999999 !important;
+
+  box-sizing: border-box;
+}
+
+/* LARGE MODAL */
+.teacher-details-modal {
+  max-width: 1000px;
+}
+
+/* INPUTS */
+.popup-box input,
+.assignment-popup input,
+.teacher-form input,
+.popup-box textarea,
+.assignment-popup textarea {
+  width: 100%;
+
+  padding: 12px;
+  margin-top: 12px;
+
+  border: none;
+  outline: none;
+
+  border-radius: 10px;
+
+  background: #1e293b;
+  color: white;
+
+  box-sizing: border-box;
+}
+
+/* BUTTON GROUPS */
+.popup-actions,
+.btn-group,
+.teacher-form-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+/* BUTTONS */
+.popup-actions button,
+.btn-group button,
+.teacher-form-buttons button {
+  flex: 1;
+
+  border: none;
+  border-radius: 10px;
+
+  padding: 11px;
+
+  color: white;
+  cursor: pointer;
+}
+
+/* =========================
+   MOBILE
 ========================= */
 
 @media (max-width: 768px) {
@@ -213,71 +310,21 @@ button {
   .box {
     padding: 12px;
   }
-}
 
-/* MOBILE FIX */
-html,
-body,
-#root {
-  width: 100%;
-  overflow-x: hidden;
-}
-
-/* MAIN CONTENT */
-.main-content {
-  width: 100%;
-  min-width: 0;
-  overflow-x: hidden;
-}
-
-/* FIX CLICK ISSUES */
-button,
-input,
-textarea {
-  touch-action: manipulation;
-}
-
-/* SIDEBAR FIX */
-.sidebar {
-  z-index: 1000;
-}
-
-/* POPUPS ABOVE SIDEBAR */
-.assignment-popup-overlay,
-.popup-overlay,
-.teacher-modal-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 999999 !important;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  background: rgba(0, 0, 0, 0.7);
-}
-
-/* POPUP BOX */
-.assignment-popup,
-.popup-box,
-.teacher-form,
-.teacher-details-modal {
-  position: relative;
-  z-index: 999999;
-}
-
-/* MOBILE SAFE */
-@media (max-width: 768px) {
-  .assignment-popup,
+  /* POPUPS */
   .popup-box,
+  .assignment-popup,
   .teacher-form {
-    width: 92% !important;
-    max-width: 92% !important;
+    width: calc(100% - 24px) !important;
+    max-width: 100% !important;
   }
 
   .teacher-details-modal {
-    width: 95% !important;
+    width: calc(100% - 20px) !important;
+
+    max-width: 100% !important;
     max-height: 85vh;
+
     overflow-y: auto;
   }
 }

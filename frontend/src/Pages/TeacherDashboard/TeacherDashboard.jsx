@@ -35,10 +35,30 @@ function TeacherDashboard() {
       .catch(() => setAttendance([]));
   };
 
+  // ✅ FETCH EVERYTHING FROM BACKEND
   useEffect(() => {
-    setCourses(JSON.parse(localStorage.getItem("courses")) || []);
-    setAssignments(JSON.parse(localStorage.getItem("assignments")) || []);
-    setSubmissions(JSON.parse(localStorage.getItem("submissions")) || []);
+    fetch("https://educonnect-q5og.onrender.com/api/courses")
+      .then((res) => res.json())
+      .then((data) => setCourses(data || []));
+
+    fetch("https://educonnect-q5og.onrender.com/api/assignments")
+      .then((res) => res.json())
+      .then((data) => {
+        setAssignments(data || []);
+
+        const allSubmissions = [];
+
+        data.forEach((a) => {
+          a.submissions?.forEach((s) => {
+            allSubmissions.push({
+              ...s,
+              assignmentId: a._id,
+            });
+          });
+        });
+
+        setSubmissions(allSubmissions);
+      });
 
     fetchChannels();
     fetchAttendance();

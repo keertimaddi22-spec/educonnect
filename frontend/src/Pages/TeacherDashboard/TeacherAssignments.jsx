@@ -14,7 +14,7 @@ function TeacherAssignments() {
 
   // FETCH
   const fetchAssignments = () => {
-    fetch("http://localhost:5000/api/assignments")
+    "https://educonnect-q5og.onrender.com/api/assignments"
       .then((res) => res.json())
       .then((data) => {
         setAssignments(data);
@@ -33,7 +33,7 @@ function TeacherAssignments() {
       return alert("Fill all fields");
     }
 
-    await fetch("http://localhost:5000/api/assignments", {
+    await fetch("https://educonnect-q5og.onrender.com/api/assignments", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +53,7 @@ function TeacherAssignments() {
 
   // DELETE
   const handleDelete = async (id) => {
-    await fetch(`http://localhost:5000/api/assignments/${id}`, {
+    await fetch(`https://educonnect-q5og.onrender.com/api/assignments/${id}`, {
       method: "DELETE",
     });
 
@@ -63,7 +63,7 @@ function TeacherAssignments() {
   // RETURN
   const handleReturn = async (assignmentId, student) => {
     await fetch(
-      `http://localhost:5000/api/assignments/return/${assignmentId}`,
+      `https://educonnect-q5og.onrender.com/api/assignments/return/${assignmentId}`,
       {
         method: "PUT",
         headers: {
@@ -76,7 +76,7 @@ function TeacherAssignments() {
     );
 
     const updatedAssignments = await fetch(
-      "http://localhost:5000/api/assignments",
+      "https://educonnect-q5og.onrender.com/api/assignments",
     ).then((res) => res.json());
 
     setAssignments(updatedAssignments);
@@ -154,9 +154,8 @@ function TeacherAssignments() {
             <div className="teacher-stats">
               <div className="teacher-stat-box">
                 <span>
-                  {a.submissions?.filter(
-                    (s) => s.status !== "returned",
-                  ).length || 0}
+                  {a.submissions?.filter((s) => s.status !== "returned")
+                    .length || 0}
                 </span>
 
                 <p>Submissions</p>
@@ -164,9 +163,8 @@ function TeacherAssignments() {
 
               <div className="teacher-stat-box returned">
                 <span>
-                  {a.submissions?.filter(
-                    (s) => s.status === "returned",
-                  ).length || 0}
+                  {a.submissions?.filter((s) => s.status === "returned")
+                    .length || 0}
                 </span>
 
                 <p>Returned</p>
@@ -194,25 +192,20 @@ function TeacherAssignments() {
                 <p>Due: {selectedAssignment.dueDate}</p>
               </div>
 
-              <button onClick={() => setSelectedAssignment(null)}>
-                ✖
-              </button>
+              <button onClick={() => setSelectedAssignment(null)}>✖</button>
             </div>
 
             {/* COLUMNS */}
             <div className="modal-columns">
-
               {/* SUBMISSIONS */}
               <div className="column">
                 <div className="column-header">
                   <h3>Submissions</h3>
 
                   <span className="count">
-                    {
-                      selectedAssignment.submissions?.filter(
-                        (s) => s.status !== "returned",
-                      ).length || 0
-                    }
+                    {selectedAssignment.submissions?.filter(
+                      (s) => s.status !== "returned",
+                    ).length || 0}
                   </span>
                 </div>
 
@@ -242,9 +235,7 @@ function TeacherAssignments() {
 
                 {selectedAssignment.submissions?.filter(
                   (s) => s.status !== "returned",
-                ).length === 0 && (
-                  <p className="empty">No submissions</p>
-                )}
+                ).length === 0 && <p className="empty">No submissions</p>}
               </div>
 
               {/* RETURNED */}
@@ -253,11 +244,9 @@ function TeacherAssignments() {
                   <h3>Returned</h3>
 
                   <span className="count green-count">
-                    {
-                      selectedAssignment.submissions?.filter(
-                        (s) => s.status === "returned",
-                      ).length || 0
-                    }
+                    {selectedAssignment.submissions?.filter(
+                      (s) => s.status === "returned",
+                    ).length || 0}
                   </span>
                 </div>
 
@@ -274,9 +263,7 @@ function TeacherAssignments() {
                         </div>
                       </div>
 
-                      <span className="returned-badge">
-                        Returned
-                      </span>
+                      <span className="returned-badge">Returned</span>
                     </div>
                   ))}
 
@@ -286,7 +273,6 @@ function TeacherAssignments() {
                   <p className="empty">No returned submissions</p>
                 )}
               </div>
-
             </div>
           </div>
         </div>

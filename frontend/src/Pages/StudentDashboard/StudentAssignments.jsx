@@ -12,7 +12,7 @@ function StudentAssignments() {
 
   // FETCH
   const fetchAssignments = () => {
-    fetch("http://localhost:5000/api/assignments")
+    fetch("https://educonnect-q5og.onrender.com/api/assignments")
       .then((res) => res.json())
       .then((data) => setAssignments(data));
   };
@@ -26,7 +26,7 @@ function StudentAssignments() {
     if (!answer.trim()) return alert("Write answer");
 
     await fetch(
-      `http://localhost:5000/api/assignments/submit/${selectedAssignment._id}`,
+      `https://educonnect-q5og.onrender.com/api/assignments/submit/${selectedAssignment._id}`,
       {
         method: "POST",
         headers: {

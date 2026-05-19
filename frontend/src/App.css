@@ -168,6 +168,7 @@ textarea {
 ========================= */
 
 .sidebar {
+  position: fixed;
   z-index: 1000;
 }
 
@@ -177,7 +178,9 @@ textarea {
 
 .popup-overlay,
 .assignment-popup-overlay,
-.teacher-modal-overlay {
+.teacher-modal-overlay,
+.student-modal-overlay,
+.form-box {
   position: fixed;
   inset: 0;
 
@@ -195,7 +198,9 @@ textarea {
 .popup-box,
 .assignment-popup,
 .teacher-form,
-.teacher-details-modal {
+.teacher-details-modal,
+.student-modal,
+.form-box form {
   position: relative;
 
   width: 90%;
@@ -207,7 +212,7 @@ textarea {
   border-radius: 16px;
   padding: 22px;
 
-  z-index: 999999 !important;
+  z-index: 1000000 !important;
 
   box-sizing: border-box;
 }
@@ -222,7 +227,9 @@ textarea {
 .assignment-popup input,
 .teacher-form input,
 .popup-box textarea,
-.assignment-popup textarea {
+.assignment-popup textarea,
+.student-modal textarea,
+.form-box input {
   width: 100%;
 
   padding: 12px;
@@ -242,7 +249,8 @@ textarea {
 /* BUTTON GROUPS */
 .popup-actions,
 .btn-group,
-.teacher-form-buttons {
+.teacher-form-buttons,
+.student-modal-buttons {
   display: flex;
   gap: 10px;
   margin-top: 18px;
@@ -251,7 +259,8 @@ textarea {
 /* BUTTONS */
 .popup-actions button,
 .btn-group button,
-.teacher-form-buttons button {
+.teacher-form-buttons button,
+.student-modal-buttons button {
   flex: 1;
 
   border: none;
@@ -314,7 +323,8 @@ textarea {
   /* POPUPS */
   .popup-box,
   .assignment-popup,
-  .teacher-form {
+  .teacher-form,
+  .student-modal {
     width: calc(100% - 24px) !important;
     max-width: 100% !important;
   }

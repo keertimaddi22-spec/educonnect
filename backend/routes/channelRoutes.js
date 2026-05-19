@@ -137,6 +137,19 @@ router.post("/approve/:id", async (req, res) => {
   }
 });
 
+// =========================
+// ❌ DELETE CHANNEL
+// =========================
+router.delete("/:id", async (req, res) => {
+  try {
+    await Channel.findByIdAndDelete(req.params.id);
+
+    res.json({ message: "Channel deleted" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 
 // =========================
 // ❌ REJECT REQUEST

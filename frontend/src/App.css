@@ -214,3 +214,70 @@ button {
     padding: 12px;
   }
 }
+
+/* MOBILE FIX */
+html,
+body,
+#root {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* MAIN CONTENT */
+.main-content {
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+/* FIX CLICK ISSUES */
+button,
+input,
+textarea {
+  touch-action: manipulation;
+}
+
+/* SIDEBAR FIX */
+.sidebar {
+  z-index: 1000;
+}
+
+/* POPUPS ABOVE SIDEBAR */
+.assignment-popup-overlay,
+.popup-overlay,
+.teacher-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999 !important;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* POPUP BOX */
+.assignment-popup,
+.popup-box,
+.teacher-form,
+.teacher-details-modal {
+  position: relative;
+  z-index: 999999;
+}
+
+/* MOBILE SAFE */
+@media (max-width: 768px) {
+  .assignment-popup,
+  .popup-box,
+  .teacher-form {
+    width: 92% !important;
+    max-width: 92% !important;
+  }
+
+  .teacher-details-modal {
+    width: 95% !important;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+}

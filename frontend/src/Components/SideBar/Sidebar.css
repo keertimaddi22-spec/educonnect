@@ -1,6 +1,6 @@
 .sidebar {
   width: 240px;
-  height: 100vh;
+  height: 100dvh;
   background: linear-gradient(180deg, #020617, #020c1b);
   color: white;
   padding: 20px;
@@ -13,9 +13,11 @@
   flex-direction: column;
   justify-content: space-between;
 
-  transition: width 0.3s ease;
-  z-index: 1000;
+  transition: all 0.3s ease;
+  z-index: 9999;
+
   overflow-x: hidden;
+  overflow-y: auto;
 }
 
 /* COLLAPSED */
@@ -82,8 +84,8 @@
 }
 
 .profile img {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -106,7 +108,7 @@
 
 .search-box input {
   width: 100%;
-  padding: 8px 12px 8px 32px;
+  padding: 10px 12px 10px 34px;
   border-radius: 20px;
   border: none;
   background: #0f172a;
@@ -117,7 +119,7 @@
 .search-icon {
   position: absolute;
   top: 50%;
-  left: 8px;
+  left: 10px;
   transform: translateY(-50%);
   color: #94a3b8;
   font-size: 14px;
@@ -126,7 +128,7 @@
 /* DROPDOWN */
 .search-dropdown {
   position: absolute;
-  top: 38px;
+  top: 42px;
   width: 100%;
   background: #0f172a;
   border-radius: 8px;
@@ -156,8 +158,8 @@
   align-items: center;
   gap: 12px;
 
-  padding: 10px 12px;
-  border-radius: 10px;
+  padding: 12px;
+  border-radius: 12px;
 
   text-decoration: none;
   color: #cbd5e1;
@@ -166,12 +168,10 @@
   transition: 0.2s;
 }
 
-/* HOVER */
 .menu a:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.06);
 }
 
-/* ACTIVE */
 .menu a.active {
   background: linear-gradient(90deg, #2563eb, #3b82f6);
   color: white;
@@ -201,7 +201,7 @@
   justify-content: center;
   gap: 8px;
 
-  padding: 10px;
+  padding: 12px;
   border: none;
   border-radius: 10px;
   background: #ef4444;
@@ -215,94 +215,53 @@
   opacity: 0.9;
 }
 
-/* ========================= */
-/* 🔥 COLLAPSE MAGIC */
-/* ========================= */
-
+/* COLLAPSE */
 .sidebar.collapsed .profile-text,
 .sidebar.collapsed .menu span,
 .sidebar.collapsed .logout-btn span,
 .sidebar.collapsed .upload-box,
+.sidebar.collapsed .search-box,
 .sidebar.collapsed .dots {
   display: none;
 }
 
-/* CENTER EVERYTHING */
-.sidebar.collapsed .top-bar {
-  justify-content: center;
-}
-
-.sidebar.collapsed .menu-toggle {
-  margin: auto;
-}
-
-.sidebar.collapsed .menu a {
-  justify-content: center;
-  padding: 12px;
-}
-
+.sidebar.collapsed .top-bar,
+.sidebar.collapsed .profile,
+.sidebar.collapsed .menu a,
 .sidebar.collapsed .logout-btn {
   justify-content: center;
 }
 
+.sidebar.collapsed .menu a {
+  padding: 14px;
+}
+
+/* ================= MOBILE ================= */
+
 @media (max-width: 768px) {
   .sidebar {
-    width: 72px; /* collapsed safe width */
+    width: 72px;
     padding: 14px 10px;
-    overflow-x: hidden;
   }
 
-  /* when opened on mobile */
   .sidebar:not(.collapsed) {
-    width: 240px; /* FULL WIDTH OPEN */
+    width: 240px;
   }
 
-  /* prevent content squeezing */
+  .sidebar.collapsed {
+    width: 72px;
+  }
+
   .menu a,
   .logout-btn {
     white-space: nowrap;
   }
 
-  .menu {
-    gap: 12px;
-  }
-
-  .bottom {
-    align-items: stretch;
-  }
-
-  /* text hide only in collapsed */
-  .sidebar.collapsed .profile-text,
-  .sidebar.collapsed .menu span,
-  .sidebar.collapsed .logout-btn span,
-  .sidebar.collapsed .upload-box,
-  .sidebar.collapsed .search-box,
-  .sidebar.collapsed .dots {
-    display: none;
-  }
-
-  /* center icons in collapsed */
-  .sidebar.collapsed .menu a,
-  .sidebar.collapsed .logout-btn,
-  .sidebar.collapsed .top-bar,
-  .sidebar.collapsed .profile {
-    justify-content: center;
-  }
-}
-
-@media (max-width: 768px) {
   .sidebar-backdrop {
     position: fixed;
     inset: 0;
-
-    background: rgba(15, 23, 42, 0.55); /* blue-dark tint */
-    backdrop-filter: blur(6px);
-  }
-  .sidebar {
-    z-index: 99999;
-  }
-
-  .sidebar-backdrop {
-    z-index: 99998;
+    background: rgba(2, 6, 23, 0.6);
+    backdrop-filter: blur(5px);
+    z-index: 9998;
   }
 }

@@ -14,7 +14,7 @@ function TeacherAssignments() {
 
   // FETCH
   const fetchAssignments = () => {
-    "https://educonnect-q5og.onrender.com/api/assignments"
+    fetch("https://educonnect-q5og.onrender.com/api/assignments")
       .then((res) => res.json())
       .then((data) => {
         setAssignments(data);

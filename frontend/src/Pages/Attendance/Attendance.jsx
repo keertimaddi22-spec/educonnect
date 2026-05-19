@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import "./Attendance.css";
 
+const API = "https://educonnect-q5og.onrender.com";
+
 function Attendance() {
   const user = localStorage.getItem("user");
 
-  const today = new Date().toISOString().split("T")[0];
+  // ✅ MOBILE SAFE DATE
+  const today = new Date().toLocaleDateString("en-CA");
 
   const [marked, setMarked] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -13,21 +16,19 @@ function Attendance() {
   useEffect(() => {
     const checkAttendance = async () => {
       try {
-        const res = await fetch(
-          "https://educonnect-q5og.onrender.com/api/attendance",
-        );
+        const res = await fetch(`${API}/api/attendance`);
 
         const data = await res.json();
 
-        const already = data.find(
+        const alreadyMarked = data.find(
           (a) => a.student === user && a.date === today,
         );
 
-        if (already) {
+        if (alreadyMarked) {
           setMarked(true);
         }
       } catch (err) {
-        console.log("CHECK ERROR 👉", err);
+        console.log(err);
       }
     };
 
@@ -36,39 +37,38 @@ function Attendance() {
 
   // ✅ MARK PRESENT
   const markPresent = async () => {
-    try {
-      setLoading(true);
+    if (loading) return;
 
-      const res = await fetch(
-        "https://educonnect-q5og.onrender.com/api/attendance",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            student: user,
-            date: today,
-            status: "present",
-          }),
+    setLoading(true);
+
+    try {
+      const res = await fetch(`${API}/api/attendance`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({
+          student: user,
+          date: today,
+          status: "present",
+        }),
+      });
 
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.message || "Failed ❌");
+        alert(data.message || "Attendance failed");
         setLoading(false);
         return;
       }
 
       setMarked(true);
-      setLoading(false);
     } catch (err) {
-      console.log("MARK ERROR 👉", err);
-      alert("Server error ❌");
-      setLoading(false);
+      console.log(err);
+      alert("Server error");
     }
+
+    setLoading(false);
   };
 
   return (
@@ -76,7 +76,7 @@ function Attendance() {
       <h2>📅 Today: {today}</h2>
 
       {!marked ? (
-        <button className="mark-btn" onClick={markPresent} disabled={loading}>
+        <button className="mark-btn" onClick={markPresent}>
           {loading ? "Marking..." : "Mark Present"}
         </button>
       ) : (

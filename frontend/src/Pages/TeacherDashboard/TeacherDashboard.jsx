@@ -21,14 +21,14 @@ function TeacherDashboard() {
 
   // FETCH CHANNELS
   const fetchChannels = () => {
-    fetch("http://localhost:5000/api/channels")
+    fetch("https://educonnect-q5og.onrender.com/api/channels")
       .then((res) => res.json())
       .then((data) => setChannels(data))
       .catch(() => setChannels([]));
   };
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/attendance")
+    fetch("https://educonnect-q5og.onrender.com/api/attendance")
       .then((res) => res.json())
       .then((data) => setAttendance(data || []))
       .catch(() => setAttendance([]));
@@ -38,7 +38,6 @@ function TeacherDashboard() {
     setCourses(JSON.parse(localStorage.getItem("courses")) || []);
     setAssignments(JSON.parse(localStorage.getItem("assignments")) || []);
     setSubmissions(JSON.parse(localStorage.getItem("submissions")) || []);
-    setAttendance(JSON.parse(localStorage.getItem("attendance")) || []);
 
     fetchChannels();
   }, []);
@@ -59,7 +58,7 @@ function TeacherDashboard() {
     };
   });
 
-  const today = new Date().toISOString().split("T")[0];
+  const today = new Date().toLocaleDateString("en-CA");
 
   const todayAttendance = (attendance || []).filter((a) => a?.date === today);
 

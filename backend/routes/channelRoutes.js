@@ -15,6 +15,7 @@ router.post("/create", async (req, res) => {
     });
 
     await newChannel.save();
+
     res.json(newChannel);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -36,7 +37,7 @@ router.get("/", async (req, res) => {
 
 
 // =========================
-// ✅ REQUEST TO JOIN (FIX FOR YOUR ERROR)
+// ✅ REQUEST TO JOIN
 // =========================
 router.post("/request/:id", async (req, res) => {
   try {
@@ -45,16 +46,31 @@ router.post("/request/:id", async (req, res) => {
     const channel = await Channel.findById(req.params.id);
 
     if (!channel) {
-      return res.status(404).json({ message: "Channel not found" });
+      return res.status(404).json({
+        message: "Channel not found",
+      });
     }
 
-    // already requested check
-    const already = channel.requests.find(
+    // already requested
+    const existingRequest = channel.requests.find(
       (r) => r.student === student
     );
 
-    if (already) {
-      return res.status(400).json({ message: "Already requested" });
+    // already member
+    const existingMember = channel.members.find(
+      (m) => m.student === student
+    );
+
+    if (existingMember) {
+      return res.status(400).json({
+        message: "Already joined",
+      });
+    }
+
+    if (existingRequest) {
+      return res.status(400).json({
+        message: "Already requested",
+      });
     }
 
     channel.requests.push({
@@ -66,13 +82,15 @@ router.post("/request/:id", async (req, res) => {
 
     res.json(channel);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({
+      message: err.message,
+    });
   }
 });
 
 
 // =========================
-// ✅ APPROVE REQUEST (TEACHER)
+// ✅ APPROVE REQUEST
 // =========================
 router.post("/approve/:id", async (req, res) => {
   try {
@@ -80,17 +98,42 @@ router.post("/approve/:id", async (req, res) => {
 
     const channel = await Channel.findById(req.params.id);
 
-    channel.members.push({ student });
+    if (!channel) {
+      return res.status(404).json({
+        message: "Channel not found",
+      });
+    }
 
-    channel.requests = channel.requests.map((r) =>
-      r.student === student ? { ...r, status: "approved" } : r
+    // add member if not already
+    const alreadyMember = channel.members.find(
+      (m) => m.student === student
     );
+
+    if (!alreadyMember) {
+      channel.members.push({
+        student,
+      });
+    }
+
+    // update request status
+    channel.requests = channel.requests.map((r) => {
+      if (r.student === student) {
+        return {
+          ...r._doc,
+          status: "approved",
+        };
+      }
+
+      return r;
+    });
 
     await channel.save();
 
     res.json(channel);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({
+      message: err.message,
+    });
   }
 });
 
@@ -104,15 +147,30 @@ router.post("/reject/:id", async (req, res) => {
 
     const channel = await Channel.findById(req.params.id);
 
-    channel.requests = channel.requests.map((r) =>
-      r.student === student ? { ...r, status: "rejected" } : r
-    );
+    if (!channel) {
+      return res.status(404).json({
+        message: "Channel not found",
+      });
+    }
+
+    channel.requests = channel.requests.map((r) => {
+      if (r.student === student) {
+        return {
+          ...r._doc,
+          status: "rejected",
+        };
+      }
+
+      return r;
+    });
 
     await channel.save();
 
     res.json(channel);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({
+      message: err.message,
+    });
   }
 });
 

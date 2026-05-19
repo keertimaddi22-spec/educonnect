@@ -19,20 +19,21 @@ function TeacherDashboard() {
 
   const name = localStorage.getItem("name");
 
-  // FETCH CHANNELS
+  // ✅ FETCH CHANNELS
   const fetchChannels = () => {
     fetch("https://educonnect-q5og.onrender.com/api/channels")
       .then((res) => res.json())
-      .then((data) => setChannels(data))
+      .then((data) => setChannels(data || []))
       .catch(() => setChannels([]));
   };
 
-  useEffect(() => {
+  // ✅ FETCH ATTENDANCE
+  const fetchAttendance = () => {
     fetch("https://educonnect-q5og.onrender.com/api/attendance")
       .then((res) => res.json())
       .then((data) => setAttendance(data || []))
       .catch(() => setAttendance([]));
-  }, []);
+  };
 
   useEffect(() => {
     setCourses(JSON.parse(localStorage.getItem("courses")) || []);
@@ -40,13 +41,54 @@ function TeacherDashboard() {
     setSubmissions(JSON.parse(localStorage.getItem("submissions")) || []);
 
     fetchChannels();
+    fetchAttendance();
   }, []);
+
+  // ✅ APPROVE REQUEST
+  const handleApprove = async (channelId, student) => {
+    try {
+      await fetch(
+        `https://educonnect-q5og.onrender.com/api/channels/approve/${channelId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ student }),
+        },
+      );
+
+      fetchChannels();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // ✅ REJECT REQUEST
+  const handleReject = async (channelId, student) => {
+    try {
+      await fetch(
+        `https://educonnect-q5og.onrender.com/api/channels/reject/${channelId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ student }),
+        },
+      );
+
+      fetchChannels();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const students = [
     ...new Set((submissions || []).map((s) => s.student || "")),
   ];
 
-  // CHART DATA SAFE
+  // ✅ CHART DATA
   const chartData = (assignments || []).map((a) => {
     const count = (submissions || []).filter(
       (s) => s.assignmentId === a._id,
@@ -58,9 +100,24 @@ function TeacherDashboard() {
     };
   });
 
-  const today = new Date().toLocaleDateString("en-CA");
+  const today = new Date().toISOString().split("T")[0];
 
   const todayAttendance = (attendance || []).filter((a) => a?.date === today);
+
+  // ✅ ONLY PENDING REQUESTS
+  const pendingRequests = [];
+
+  channels.forEach((channel) => {
+    channel?.requests?.forEach((req) => {
+      if (req.status === "pending") {
+        pendingRequests.push({
+          channelId: channel._id,
+          channelName: channel.name,
+          student: req.student,
+        });
+      }
+    });
+  });
 
   return (
     <div className="dashboard">
@@ -117,28 +174,42 @@ function TeacherDashboard() {
         <div className="box full">
           <h2>Channel Requests 🔔</h2>
 
-          {channels?.length === 0 ? (
+          {pendingRequests.length === 0 ? (
             <p className="empty">No pending requests</p>
           ) : (
-            channels.map((ch, chIndex) =>
-              ch?.requests
-                ?.filter((r) => r?.status === "pending")
-                .map((r, idx) => (
-                  <div key={`${chIndex}-${idx}`} className="request-item">
-                    <div>
-                      <strong>{r.student}</strong>
-                      <p style={{ fontSize: "12px", color: "#94a3b8" }}>
-                        wants to join <b>{ch.name}</b>
-                      </p>
-                    </div>
+            pendingRequests.map((r, i) => (
+              <div key={i} className="request-item">
+                <div>
+                  <strong>{r.student}</strong>
 
-                    <div className="request-actions">
-                      <button className="accept-btn">Accept</button>
-                      <button className="reject-btn">Reject</button>
-                    </div>
-                  </div>
-                )),
-            )
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#94a3b8",
+                      marginTop: "4px",
+                    }}
+                  >
+                    wants to join <b>{r.channelName}</b>
+                  </p>
+                </div>
+
+                <div className="request-actions">
+                  <button
+                    className="accept-btn"
+                    onClick={() => handleApprove(r.channelId, r.student)}
+                  >
+                    Accept
+                  </button>
+
+                  <button
+                    className="reject-btn"
+                    onClick={() => handleReject(r.channelId, r.student)}
+                  >
+                    Reject
+                  </button>
+                </div>
+              </div>
+            ))
           )}
         </div>
 
@@ -162,7 +233,15 @@ function TeacherDashboard() {
                   </div>
                 </div>
 
-                <span>{a.status}</span>
+                <span
+                  style={{
+                    color: "#22c55e",
+                    fontWeight: "600",
+                    textTransform: "capitalize",
+                  }}
+                >
+                  {a.status}
+                </span>
               </div>
             ))
           )}

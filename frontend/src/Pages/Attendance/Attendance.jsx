@@ -42,7 +42,7 @@ function Attendance() {
     setLoading(true);
 
     try {
-      const res = await fetch(`${API}/api/attendance`, {
+      const res = await fetch(`${API}/api/attendance/mark`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

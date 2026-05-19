@@ -18,45 +18,88 @@ function Assignments() {
   const [selectedAssignment, setSelectedAssignment] = useState(null);
   const [answer, setAnswer] = useState("");
 
-  const fetchAssignments = () => {
-    fetch("https://educonnect-q5og.onrender.com/api/assignments")
-      .then((res) => res.json())
-      .then((data) => setAssignments(data));
+  // ✅ FETCH
+  const fetchAssignments = async () => {
+    try {
+      const res = await fetch(
+        "https://educonnect-q5og.onrender.com/api/assignments",
+      );
+
+      const data = await res.json();
+
+      setAssignments(data || []);
+    } catch (err) {
+      console.log(err);
+      setAssignments([]);
+    }
   };
 
   useEffect(() => {
     fetchAssignments();
-    setSubmissions(JSON.parse(localStorage.getItem("submissions")) || []);
+
+    const saved = JSON.parse(localStorage.getItem("submissions")) || [];
+
+    setSubmissions(saved);
   }, []);
 
+  // ✅ ADD ASSIGNMENT
   const handleAdd = async (e) => {
     e.preventDefault();
 
-    if (!title || !dueDate) return alert("Fill all fields");
+    if (!title.trim() || !dueDate) {
+      return;
+    }
 
-    await fetch("https://educonnect-q5og.onrender.com/api/assignments", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title, dueDate }),
-    });
+    try {
+      const res = await fetch(
+        "https://educonnect-q5og.onrender.com/api/assignments",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title,
+            dueDate,
+          }),
+        },
+      );
 
-    setTitle("");
-    setDueDate("");
-    setShowForm(false);
+      if (!res.ok) {
+        alert("Failed to create assignment");
+        return;
+      }
 
-    fetchAssignments();
+      setTitle("");
+      setDueDate("");
+      setShowForm(false);
+
+      fetchAssignments();
+    } catch (err) {
+      console.log(err);
+      alert("Server error");
+    }
   };
 
+  // ✅ DELETE
   const handleDelete = async (id) => {
-    await fetch(`https://educonnect-q5og.onrender.com/api/assignments/${id}`, {
-      method: "DELETE",
-    });
+    try {
+      await fetch(
+        `https://educonnect-q5og.onrender.com/api/assignments/${id}`,
+        {
+          method: "DELETE",
+        },
+      );
 
-    fetchAssignments();
+      fetchAssignments();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
+  // ✅ SUBMIT
   const handleSubmit = () => {
-    if (!answer.trim()) return alert("Write answer");
+    if (!answer.trim()) return;
 
     const newSubmission = {
       assignmentId: selectedAssignment._id,
@@ -74,6 +117,7 @@ function Assignments() {
     setAnswer("");
   };
 
+  // ✅ FILTER
   const filteredAssignments = assignments.filter((a) => {
     if (role === "teacher") return true;
 
@@ -82,11 +126,15 @@ function Assignments() {
     );
 
     if (activeTab === "completed") return submitted;
+
     if (activeTab === "pending") return !submitted;
+
+    return true;
   });
 
   return (
     <div className="assignments">
+      {/* HEADER */}
       <div className="page-header">
         <h2>Assignments 📝</h2>
 
@@ -95,11 +143,13 @@ function Assignments() {
             className="add-assignment-btn"
             onClick={() => setShowForm(true)}
           >
-            <FaPlus /> Add Assignment
+            <FaPlus />
+            Add Assignment
           </button>
         )}
       </div>
 
+      {/* STUDENT TABS */}
       {role === "student" && (
         <div className="tabs">
           <button
@@ -118,106 +168,125 @@ function Assignments() {
         </div>
       )}
 
+      {/* CREATE FORM */}
       {showForm && role === "teacher" && (
-        <div className="form-box">
-          <form onSubmit={handleAdd}>
+        <div className="popup-overlay" onClick={() => setShowForm(false)}>
+          <div className="popup-box" onClick={(e) => e.stopPropagation()}>
             <h2>Add Assignment</h2>
 
-            <input
-              type="text"
-              placeholder="Title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
+            <form onSubmit={handleAdd}>
+              <input
+                type="text"
+                placeholder="Assignment title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
 
-            <input
-              type="date"
-              value={dueDate}
-              onChange={(e) => setDueDate(e.target.value)}
-            />
+              <input
+                type="date"
+                value={dueDate}
+                onChange={(e) => setDueDate(e.target.value)}
+              />
 
-            <div className="btn-group">
-              <button type="submit" className="post-btn">
-                Post
-              </button>
+              <div className="btn-group">
+                <button type="submit" className="post-btn">
+                  Post
+                </button>
 
-              <button
-                type="button"
-                className="cancel-btn"
-                onClick={() => setShowForm(false)}
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
+                <button
+                  type="button"
+                  className="cancel-btn"
+                  onClick={() => setShowForm(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       )}
 
+      {/* SUBMIT FORM */}
       {selectedAssignment && role === "student" && (
-        <div className="form-box">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleSubmit();
-            }}
-          >
+        <div
+          className="popup-overlay"
+          onClick={() => setSelectedAssignment(null)}
+        >
+          <div className="popup-box" onClick={(e) => e.stopPropagation()}>
             <h2>{selectedAssignment.title}</h2>
 
-            <input
-              type="text"
-              placeholder="Your Answer"
-              value={answer}
-              onChange={(e) => setAnswer(e.target.value)}
-            />
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSubmit();
+              }}
+            >
+              <input
+                type="text"
+                placeholder="Write your answer..."
+                value={answer}
+                onChange={(e) => setAnswer(e.target.value)}
+              />
 
-            <div className="btn-group">
-              <button type="submit" className="post-btn">
-                Submit
-              </button>
+              <div className="btn-group">
+                <button type="submit" className="post-btn">
+                  Submit
+                </button>
 
-              <button
-                type="button"
-                className="cancel-btn"
-                onClick={() => setSelectedAssignment(null)}
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
+                <button
+                  type="button"
+                  className="cancel-btn"
+                  onClick={() => setSelectedAssignment(null)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       )}
 
-      {filteredAssignments.map((a) => (
-        <div key={a._id} className="assignment-card">
-          <div className="card-top">
-            <h3>{a.title}</h3>
-            <span className="due-date">Due: {a.dueDate}</span>
+      {/* ASSIGNMENTS */}
+      <div className="assignment-grid">
+        {filteredAssignments.map((a) => (
+          <div key={a._id} className="assignment-card">
+            <div className="card-top">
+              <div>
+                <h3>{a.title}</h3>
+
+                <p className="due-date">Due: {a.dueDate}</p>
+              </div>
+
+              {role === "teacher" && (
+                <button
+                  className="delete-btn"
+                  onClick={() => handleDelete(a._id)}
+                >
+                  Delete
+                </button>
+              )}
+            </div>
+
+            {/* STUDENT */}
+            {role === "student" &&
+              !submissions.some(
+                (s) => s.assignmentId === a._id && s.student === user,
+              ) && (
+                <button
+                  className="open-btn"
+                  onClick={() => setSelectedAssignment(a)}
+                >
+                  Open Assignment
+                </button>
+              )}
+
+            {role === "student" &&
+              submissions.some(
+                (s) => s.assignmentId === a._id && s.student === user,
+              ) && <p className="submitted">✅ Submitted</p>}
           </div>
-
-          {role === "student" &&
-            !submissions.some(
-              (s) => s.assignmentId === a._id && s.student === user,
-            ) && (
-              <button
-                className="open-btn"
-                onClick={() => setSelectedAssignment(a)}
-              >
-                Open Assignment
-              </button>
-            )}
-
-          {role === "student" &&
-            submissions.some(
-              (s) => s.assignmentId === a._id && s.student === user,
-            ) && <p className="submitted">✅ Submitted</p>}
-
-          {role === "teacher" && (
-            <button className="delete-btn" onClick={() => handleDelete(a._id)}>
-              🗑 Delete
-            </button>
-          )}
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

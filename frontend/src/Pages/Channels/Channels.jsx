@@ -53,6 +53,14 @@ function Channels() {
     fetchChannels();
   };
 
+  const handleDelete = async (id) => {
+    await fetch(`https://educonnect-q5og.onrender.com/api/channels/${id}`, {
+      method: "DELETE",
+    });
+
+    fetchChannels();
+  };
+
   return (
     <div className="channels-page">
       <div className="channels-header">
@@ -82,6 +90,7 @@ function Channels() {
 
             <div className="popup-actions">
               <button onClick={handleSave}>Create</button>
+
               <button onClick={() => setShowInput(false)}>Cancel</button>
             </div>
           </div>
@@ -91,6 +100,7 @@ function Channels() {
       <div className="channel-grid">
         {channels.map((c) => {
           const request = c.requests?.find((r) => r.student === user);
+
           const member = c.members?.find((m) => m.student === user);
 
           return (
@@ -102,12 +112,26 @@ function Channels() {
               />
 
               <h3>{c.name}</h3>
-              <p>{c.createdBy}</p>
+
+              {/* ✅ OLD + NEW SUPPORT */}
+              <p>{c.instructor || c.createdBy}</p>
 
               {role === "teacher" ? (
-                <button onClick={() => navigate(`/channel/${c._id}`)}>
-                  Open
-                </button>
+                <>
+                  <button onClick={() => navigate(`/channel/${c._id}`)}>
+                    Open
+                  </button>
+
+                  <button
+                    style={{
+                      marginTop: "10px",
+                      background: "#ef4444",
+                    }}
+                    onClick={() => handleDelete(c._id)}
+                  >
+                    Delete
+                  </button>
+                </>
               ) : member ? (
                 <button onClick={() => navigate(`/channel/${c._id}`)}>
                   Enter
@@ -116,7 +140,7 @@ function Channels() {
                 <button disabled>Requested</button>
               ) : request?.status === "rejected" ? (
                 <button disabled className="reject">
-                  Rejected
+                  Request Rejected
                 </button>
               ) : (
                 <button onClick={() => handleRequest(c._id)}>

@@ -9,35 +9,35 @@ function Attendance() {
   const [marked, setMarked] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // ✅ CHECK ATTENDANCE
-  const checkAttendance = async () => {
-    try {
-      const res = await fetch(
-        "https://educonnect-q5og.onrender.com/api/attendance",
-      );
-
-      const data = await res.json();
-
-      const alreadyMarked = data.find(
-        (a) => a.student === user && a.date === today,
-      );
-
-      if (alreadyMarked) {
-        setMarked(true);
-      } else {
-        setMarked(false);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
+  // CHECK
   useEffect(() => {
-    checkAttendance();
-  }, []);
+    const checkAttendance = async () => {
+      try {
+        const res = await fetch(
+          "https://educonnect-q5og.onrender.com/api/attendance",
+        );
 
-  // ✅ MARK PRESENT
+        const data = await res.json();
+
+        const already = data.find(
+          (a) => a.student === user && a.date === today,
+        );
+
+        if (already) {
+          setMarked(true);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    checkAttendance();
+  }, [today, user]);
+
+  // MARK
   const markPresent = async () => {
+    if (loading || marked) return;
+
     try {
       setLoading(true);
 
@@ -56,14 +56,14 @@ function Attendance() {
         },
       );
 
-      await res.json();
+      if (!res.ok) {
+        throw new Error("Failed");
+      }
 
       setMarked(true);
-
-      // ✅ refresh check
-      checkAttendance();
     } catch (err) {
       console.log(err);
+      alert("Attendance failed");
     } finally {
       setLoading(false);
     }
@@ -78,7 +78,7 @@ function Attendance() {
           {loading ? "Marking..." : "Mark Present"}
         </button>
       ) : (
-        <p className="done">✅ Attendance Marked</p>
+        <p className="done">✔ Attendance Marked</p>
       )}
     </div>
   );

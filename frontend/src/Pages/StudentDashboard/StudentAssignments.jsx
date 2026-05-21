@@ -10,7 +10,6 @@ function StudentAssignments() {
   const [answer, setAnswer] = useState("");
   const [activeTab, setActiveTab] = useState("pending");
 
-  // FETCH
   const fetchAssignments = () => {
     fetch("https://educonnect-q5og.onrender.com/api/assignments")
       .then((res) => res.json())
@@ -21,7 +20,6 @@ function StudentAssignments() {
     fetchAssignments();
   }, []);
 
-  // SUBMIT
   const handleSubmit = async () => {
     if (!answer.trim()) return alert("Write answer");
 
@@ -45,7 +43,6 @@ function StudentAssignments() {
     fetchAssignments();
   };
 
-  // FILTER
   const filteredAssignments = assignments.filter((a) => {
     const submission = a.submissions?.find((s) => s.student === user);
 
@@ -58,12 +55,10 @@ function StudentAssignments() {
 
   return (
     <div className="student-assignments-page">
-      {/* HEADER */}
       <div className="student-assignments-header">
         <h1>Assignments 📝</h1>
       </div>
 
-      {/* TABS */}
       <div className="student-tabs">
         <button
           className={activeTab === "pending" ? "active-tab" : ""}
@@ -80,7 +75,6 @@ function StudentAssignments() {
         </button>
       </div>
 
-      {/* GRID */}
       <div className="student-assignment-grid">
         {filteredAssignments.map((a) => {
           const submission = a.submissions?.find((s) => s.student === user);
@@ -117,7 +111,6 @@ function StudentAssignments() {
         })}
       </div>
 
-      {/* POPUP */}
       {selectedAssignment && (
         <div className="student-modal-overlay">
           <div className="student-modal">

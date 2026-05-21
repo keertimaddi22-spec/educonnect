@@ -113,7 +113,7 @@ function Channels() {
 
               <h3>{c.name}</h3>
 
-              {/* ✅ OLD + NEW SUPPORT */}
+            
               <p>{c.instructor || c.createdBy}</p>
 
               {role === "teacher" ? (

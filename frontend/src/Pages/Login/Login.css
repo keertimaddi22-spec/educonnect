@@ -5,7 +5,6 @@ body {
   font-family: Arial, sans-serif;
 }
 
-/* FULL SCREEN */
 .login-wrapper {
   min-height: 100vh;
   width: 100%;
@@ -21,7 +20,6 @@ body {
   animation: gradientBG 10s ease infinite;
 }
 
-/* BACKGROUND */
 @keyframes gradientBG {
   0% {
     background-position: 0% 50%;
@@ -34,7 +32,6 @@ body {
   }
 }
 
-/* APP NAME */
 .app-name {
   font-size: 42px;
   margin-bottom: 20px;
@@ -45,7 +42,6 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-/* LOGIN BOX */
 .login-box {
   width: 90%;
   max-width: 280px;
@@ -57,7 +53,6 @@ body {
   overflow: hidden;
 }
 
-/* FORM */
 .login-form {
   width: 100%;
   padding: 18px;
@@ -69,7 +64,6 @@ body {
   box-sizing: border-box;
 }
 
-/* HEADER */
 .login-header {
   display: flex;
   flex-direction: row;
@@ -83,7 +77,6 @@ body {
   margin-bottom: 12px;
 }
 
-/* AVATAR */
 .avatar {
   width: 45px;
   height: 45px;
@@ -101,7 +94,6 @@ body {
   color: white;
 }
 
-/* LOGIN */
 .login-header h2 {
   margin: 0;
 
@@ -111,7 +103,6 @@ body {
   color: white;
 }
 
-/* INPUTS */
 .login-form input {
   width: 100%;
   padding: 10px;
@@ -124,7 +115,6 @@ body {
   box-sizing: border-box;
 }
 
-/* BUTTON */
 .login-form button {
   width: 100%;
   padding: 10px;
@@ -141,7 +131,6 @@ body {
   cursor: pointer;
 }
 
-/* EXTRA TEXT */
 .extra-text {
   margin-top: 5px;
 
@@ -156,16 +145,13 @@ body {
   cursor: pointer;
 }
 
-/* MOBILE */
-/* 📱 MOBILE */
-/* 📱 MOBILE */
+
 @media (max-width: 480px) {
   .login-box {
     max-width: 300px;
     padding: 18px;
   }
 
-  /* IMAGE + LOGIN SAME LINE */
   .login-image {
     width: 100%;
 
@@ -178,7 +164,6 @@ body {
     margin-bottom: 14px;
   }
 
-  /* AVATAR */
   .avatar {
     width: 45px;
     height: 45px;
@@ -186,13 +171,11 @@ body {
     font-size: 18px;
   }
 
-  /* LOGIN TEXT */
   .login-form h2 {
     margin: 0;
     font-size: 20px;
   }
 
-  /* FORM */
   .login-form {
     width: 100%;
     padding: 0;
@@ -200,14 +183,12 @@ body {
     gap: 12px;
   }
 
-  /* INPUTS */
   .login-form input,
   .login-form button {
     padding: 10px;
     font-size: 12px;
   }
 
-  /* TEXT */
   .extra-text {
     font-size: 11px;
   }

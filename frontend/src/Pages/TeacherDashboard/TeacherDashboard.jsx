@@ -19,7 +19,6 @@ function TeacherDashboard() {
 
   const name = localStorage.getItem("name");
 
-  // ✅ FETCH CHANNELS
   const fetchChannels = () => {
     fetch("https://educonnect-q5og.onrender.com/api/channels")
       .then((res) => res.json())
@@ -27,7 +26,6 @@ function TeacherDashboard() {
       .catch(() => setChannels([]));
   };
 
-  // ✅ FETCH ATTENDANCE
   const fetchAttendance = () => {
     fetch("https://educonnect-q5og.onrender.com/api/attendance")
       .then((res) => res.json())
@@ -35,7 +33,6 @@ function TeacherDashboard() {
       .catch(() => setAttendance([]));
   };
 
-  // ✅ FETCH EVERYTHING FROM BACKEND
   useEffect(() => {
     fetch("https://educonnect-q5og.onrender.com/api/courses")
       .then((res) => res.json())
@@ -64,7 +61,6 @@ function TeacherDashboard() {
     fetchAttendance();
   }, []);
 
-  // ✅ APPROVE REQUEST
   const handleApprove = async (channelId, student) => {
     try {
       await fetch(
@@ -84,7 +80,6 @@ function TeacherDashboard() {
     }
   };
 
-  // ✅ REJECT REQUEST
   const handleReject = async (channelId, student) => {
     try {
       await fetch(
@@ -108,7 +103,6 @@ function TeacherDashboard() {
     ...new Set((submissions || []).map((s) => s.student || "")),
   ];
 
-  // ✅ CHART DATA
   const chartData = (assignments || []).map((a) => {
     const count = (submissions || []).filter(
       (s) => s.assignmentId === a._id,
@@ -124,7 +118,6 @@ function TeacherDashboard() {
 
   const todayAttendance = (attendance || []).filter((a) => a?.date === today);
 
-  // ✅ ONLY PENDING REQUESTS
   const pendingRequests = [];
 
   channels.forEach((channel) => {
@@ -141,13 +134,11 @@ function TeacherDashboard() {
 
   return (
     <div className="dashboard">
-      {/* HEADER */}
       <div className="header">
         <h1>Welcome back, {name} 👋</h1>
         <p>Here’s your teaching overview</p>
       </div>
 
-      {/* STATS */}
       <div className="stats">
         <div className="card">
           <p>Courses</p>
@@ -170,7 +161,6 @@ function TeacherDashboard() {
         </div>
       </div>
 
-      {/* GRID */}
       <div className="grid">
         {/* CHART */}
         <div className="box full">
@@ -190,7 +180,6 @@ function TeacherDashboard() {
           )}
         </div>
 
-        {/* CHANNEL REQUESTS */}
         <div className="box full">
           <h2>Channel Requests 🔔</h2>
 
@@ -233,7 +222,6 @@ function TeacherDashboard() {
           )}
         </div>
 
-        {/* ATTENDANCE */}
         <div className="box full">
           <h2>Today's Attendance 📋</h2>
 

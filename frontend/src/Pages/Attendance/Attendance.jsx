@@ -9,7 +9,7 @@ function Attendance() {
   const [marked, setMarked] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // CHECK
+  
   useEffect(() => {
     const checkAttendance = async () => {
       try {
@@ -34,7 +34,6 @@ function Attendance() {
     checkAttendance();
   }, [today, user]);
 
-  // MARK
   const markPresent = async () => {
     if (loading || marked) return;
 

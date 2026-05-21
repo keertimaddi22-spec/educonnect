@@ -4,9 +4,6 @@ import Channel from "../models/Channel.js";
 const router = express.Router();
 
 
-// =========================
-// ✅ CREATE CHANNEL
-// =========================
 router.post("/create", async (req, res) => {
   try {
     const newChannel = new Channel({
@@ -23,9 +20,7 @@ router.post("/create", async (req, res) => {
 });
 
 
-// =========================
-// ✅ GET ALL CHANNELS
-// =========================
+
 router.get("/", async (req, res) => {
   try {
     const channels = await Channel.find();
@@ -36,9 +31,7 @@ router.get("/", async (req, res) => {
 });
 
 
-// =========================
-// ✅ REQUEST TO JOIN
-// =========================
+
 router.post("/request/:id", async (req, res) => {
   try {
     const { student } = req.body;
@@ -51,12 +44,10 @@ router.post("/request/:id", async (req, res) => {
       });
     }
 
-    // already requested
     const existingRequest = channel.requests.find(
       (r) => r.student === student
     );
 
-    // already member
     const existingMember = channel.members.find(
       (m) => m.student === student
     );
@@ -89,9 +80,6 @@ router.post("/request/:id", async (req, res) => {
 });
 
 
-// =========================
-// ✅ APPROVE REQUEST
-// =========================
 router.post("/approve/:id", async (req, res) => {
   try {
     const { student } = req.body;
@@ -104,7 +92,6 @@ router.post("/approve/:id", async (req, res) => {
       });
     }
 
-    // add member if not already
     const alreadyMember = channel.members.find(
       (m) => m.student === student
     );
@@ -115,7 +102,6 @@ router.post("/approve/:id", async (req, res) => {
       });
     }
 
-    // update request status
     channel.requests = channel.requests.map((r) => {
       if (r.student === student) {
         return {
@@ -137,9 +123,7 @@ router.post("/approve/:id", async (req, res) => {
   }
 });
 
-// =========================
-// ❌ DELETE CHANNEL
-// =========================
+
 router.delete("/:id", async (req, res) => {
   try {
     await Channel.findByIdAndDelete(req.params.id);
@@ -151,9 +135,6 @@ router.delete("/:id", async (req, res) => {
 });
 
 
-// =========================
-// ❌ REJECT REQUEST
-// =========================
 router.post("/reject/:id", async (req, res) => {
   try {
     const { student } = req.body;

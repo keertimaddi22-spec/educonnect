@@ -9,7 +9,6 @@
   position: relative;
 }
 
-/* HEADER */
 .chat-header {
   display: flex;
   align-items: center;
@@ -24,7 +23,7 @@
   z-index: 5;
 }
 
-/* BACK BUTTON */
+
 .back-circle {
   width: 38px;
   height: 38px;
@@ -44,7 +43,6 @@
   font-size: 18px;
 }
 
-/* TITLE */
 .title {
   flex: 1;
   text-align: center;
@@ -57,7 +55,6 @@
   white-space: nowrap;
 }
 
-/* RIGHT */
 .right {
   width: 38px;
   display: flex;
@@ -77,7 +74,6 @@
   font-weight: bold;
 }
 
-/* BODY */
 .chat-body {
   flex: 1;
   overflow-y: auto;
@@ -92,7 +88,6 @@
   -webkit-overflow-scrolling: touch;
 }
 
-/* MESSAGE */
 .msg {
   max-width: 75%;
 
@@ -107,26 +102,22 @@
   word-break: break-word;
 }
 
-/* OWN */
 .msg.own {
   align-self: flex-end;
   background: #2563eb;
 }
 
-/* SENDER */
 .msg-sender {
   font-size: 11px;
   opacity: 0.8;
   margin-bottom: 4px;
 }
 
-/* TEXT */
 .msg-text {
   font-size: 14px;
   line-height: 1.4;
 }
 
-/* TIME */
 .msg-time {
   font-size: 10px;
   opacity: 0.7;
@@ -134,7 +125,6 @@
   text-align: right;
 }
 
-/* INPUT */
 .chat-input {
   position: sticky;
   bottom: 0;
@@ -152,7 +142,6 @@
   z-index: 10;
 }
 
-/* INPUT FIELD */
 .chat-input input {
   flex: 1;
   min-width: 0;
@@ -169,7 +158,6 @@
   font-size: 14px;
 }
 
-/* BUTTON */
 .chat-input button {
   flex-shrink: 0;
 
@@ -186,7 +174,6 @@
   font-weight: 600;
 }
 
-/* MOBILE */
 @media (max-width: 768px) {
   .chat-page {
     width: 100%;

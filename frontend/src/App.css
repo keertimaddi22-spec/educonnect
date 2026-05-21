@@ -1,4 +1,40 @@
-/* FORCE ALL POPUPS ABOVE SIDEBAR */
+
+
+:root {
+  --bg: #0f172a;
+  --sidebar: linear-gradient(180deg, #020617, #020c1b);
+  --card: #1e293b;
+  --card2: #0f172a;
+
+  --text: white;
+  --text2: #94a3b8;
+
+  --input: #0f172a;
+  --border: #1e293b;
+
+  --hover: rgba(255, 255, 255, 0.06);
+
+  --settings: #1e293b;
+}
+
+
+body.light {
+  --bg: #f1f5f9;
+  --sidebar: #ffffff;
+  --card: #ffffff;
+  --card2: #e2e8f0;
+
+  --text: #0f172a;
+  --text2: #475569;
+
+  --input: #e2e8f0;
+  --border: #cbd5e1;
+
+  --hover: #e2e8f0;
+
+  --settings: #e2e8f0;
+}
+
 
 .popup-overlay,
 .form-box,
@@ -25,12 +61,10 @@
   z-index: 999999999 !important;
 }
 
-/* SIDEBAR ALWAYS BELOW */
 .sidebar {
   z-index: 10 !important;
 }
 
-/* REMOVE PAGE CLIPPING */
 .main,
 .channels-page,
 .courses-page,
@@ -44,12 +78,9 @@
 .dashboard,
 .courses-page {
   position: relative;
-  z-index: 1;
 }
 
-/* =========================
-   GLOBAL RESET
-========================= */
+
 
 * {
   box-sizing: border-box;
@@ -68,16 +99,13 @@ body {
   font-family: sans-serif;
 }
 
-/* =========================
-   APP LAYOUT
-========================= */
+
 
 .app-layout {
   display: flex;
   min-height: 100vh;
 }
 
-/* MAIN CONTENT */
 .main {
   flex: 1;
   min-width: 0;
@@ -91,12 +119,10 @@ body {
   overflow-x: hidden;
 }
 
-/* COLLAPSED */
 .sidebar.collapsed ~ .main {
   margin-left: 80px;
 }
 
-/* LOGIN PAGE */
 .login-page {
   width: 100%;
   min-height: 100vh;
@@ -109,14 +135,11 @@ body {
   padding: 0 !important;
 }
 
-/* FULL WIDTH */
 .main.full {
   margin-left: 0;
 }
 
-/* =========================
-   PAGE SYSTEM
-========================= */
+
 
 .page,
 .dashboard,
@@ -130,9 +153,7 @@ body {
   padding: 0;
 }
 
-/* =========================
-   TYPOGRAPHY
-========================= */
+
 
 h1 {
   font-size: 28px;
@@ -160,9 +181,7 @@ p {
   font-size: 14px;
 }
 
-/* =========================
-   CARDS
-========================= */
+
 
 .card,
 .course-card,
@@ -175,9 +194,7 @@ p {
   padding: 16px;
 }
 
-/* =========================
-   GRIDS
-========================= */
+
 
 .stats,
 .grid,
@@ -189,9 +206,7 @@ p {
   gap: 16px;
 }
 
-/* =========================
-   BUTTON RESET
-========================= */
+
 
 button {
   cursor: pointer;
@@ -204,18 +219,14 @@ textarea {
   touch-action: manipulation;
 }
 
-/* =========================
-   SIDEBAR
-========================= */
+
 
 .sidebar {
   position: fixed;
-  z-index: 1000;
+  z-index: 10 !important;
 }
 
-/* =========================
-   GLOBAL POPUPS
-========================= */
+
 
 .popup-overlay,
 .assignment-popup-overlay,
@@ -235,7 +246,6 @@ textarea {
   z-index: 999999 !important;
 }
 
-/* POPUP BOX */
 .popup-box,
 .assignment-popup,
 .teacher-form,
@@ -258,12 +268,10 @@ textarea {
   box-sizing: border-box;
 }
 
-/* LARGE MODAL */
 .teacher-details-modal {
   max-width: 1000px;
 }
 
-/* INPUTS */
 .popup-box input,
 .assignment-popup input,
 .teacher-form input,
@@ -287,7 +295,6 @@ textarea {
   box-sizing: border-box;
 }
 
-/* BUTTON GROUPS */
 .popup-actions,
 .btn-group,
 .teacher-form-buttons,
@@ -297,7 +304,6 @@ textarea {
   margin-top: 18px;
 }
 
-/* BUTTONS */
 .popup-actions button,
 .btn-group button,
 .teacher-form-buttons button,
@@ -313,9 +319,6 @@ textarea {
   cursor: pointer;
 }
 
-/* =========================
-   MOBILE
-========================= */
 
 @media (max-width: 768px) {
   .main {
@@ -361,7 +364,6 @@ textarea {
     padding: 12px;
   }
 
-  /* POPUPS */
   .popup-box,
   .assignment-popup,
   .teacher-form,

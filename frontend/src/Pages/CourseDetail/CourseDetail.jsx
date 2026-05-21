@@ -45,7 +45,6 @@ function CourseDetail() {
           <h1>{course.title}</h1>
           <p>{course.description}</p>
 
-          {/* 🔥 LOGIC FIX */}
           {isEnrolled ? (
             <button className="enrolled-btn">Enrolled ✅</button>
           ) : (

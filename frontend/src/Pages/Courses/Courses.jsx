@@ -177,7 +177,7 @@
                 <h3>{c.title}</h3>
                 <p>{c.description}</p>
 
-                {/* STUDENT */}
+                
                 {role === "student" && (
                   <div className="admin-buttons">
                     <button
@@ -193,7 +193,7 @@
                   </div>
                 )}
 
-                {/* TEACHER */}
+                
                 {role === "teacher" && (
                   <div className="admin-buttons">
                     <button onClick={() => handleEdit(c)}>✏ Edit</button>

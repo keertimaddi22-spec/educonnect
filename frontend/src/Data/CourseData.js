@@ -1,4 +1,4 @@
-// src/data/CourseData.js
+
 
 const courses = [
   {

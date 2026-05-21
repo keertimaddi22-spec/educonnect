@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 
 const feedbackSchema = new mongoose.Schema(
   {
-    user: String,        // student name/email
-    courseId: String,    // optional
+    user: String,        
+    courseId: String,    
     message: String,
-    rating: Number,      // 1 to 5
+    rating: Number,      
   },
   { timestamps: true }
 );

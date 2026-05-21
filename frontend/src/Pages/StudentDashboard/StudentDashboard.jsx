@@ -141,7 +141,6 @@ function StudentDashboard() {
           Here’s what’s happening with your learning today
         </p>
 
-        {/* Attendance */}
         <div className="card attendance-box">
           <div className="attendance-top">
             <h3>📅 Today: {today}</h3>
@@ -156,7 +155,6 @@ function StudentDashboard() {
           )}
         </div>
 
-        {/* Stats */}
         <div className="stats">
           <div className="card">
             <h3>Total Courses</h3>
@@ -179,7 +177,6 @@ function StudentDashboard() {
           </div>
         </div>
 
-        {/* NAV */}
         <div className="stats">
           <div className="card clickable" onClick={() => navigate("/channels")}>
             <h3>Channels</h3>
@@ -195,7 +192,6 @@ function StudentDashboard() {
           </div>
         </div>
 
-        {/* CHART */}
         <div className="charts">
           <div className="chart-box">
             <h3>Course Progress</h3>

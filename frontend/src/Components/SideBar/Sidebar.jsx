@@ -9,6 +9,8 @@ import {
   FiLogOut,
   FiMenu,
   FiChevronRight,
+  FiSun,
+  FiMoon,
 } from "react-icons/fi";
 
 import "./Sidebar.css";
@@ -16,15 +18,24 @@ import "./Sidebar.css";
 function Sidebar({ collapsed, setCollapsed }) {
   const navigate = useNavigate();
 
-  // ✅ MOBILE PE DEFAULT COLLAPSED
-
   const [search, setSearch] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
+
+ 
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") || "dark",
+  );
 
   const name = localStorage.getItem("name");
   const role = localStorage.getItem("role");
 
-  // ✅ SCREEN RESIZE HANDLE
+ 
+  useEffect(() => {
+    document.body.className = theme;
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 768) {
@@ -52,28 +63,38 @@ function Sidebar({ collapsed, setCollapsed }) {
 
   const handleSelect = (path) => {
     navigate(path);
+
     setSearch("");
     setShowDropdown(false);
 
-    // ✅ MOBILE PE CLICK KE BAAD AUTO COLLAPSE
     if (window.innerWidth <= 768) {
       setCollapsed(true);
     }
   };
 
+ 
   const handleLogout = () => {
     localStorage.clear();
     navigate("/");
   };
 
+
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
+
   return (
     <>
       {!collapsed && (
-        <div className="sidebar-backdrop" onClick={() => setCollapsed(true)} />
+        <div
+          className="sidebar-backdrop"
+          onClick={() => setCollapsed(true)}
+        />
       )}
+
       <div className={`sidebar ${collapsed ? "collapsed" : ""}`}>
         <div className="top-section">
-          {/* TOP BAR */}
+        
           <div className="top-bar">
             <div className="dots">
               <span></span>
@@ -141,7 +162,7 @@ function Sidebar({ collapsed, setCollapsed }) {
             </div>
           )}
 
-          {/* MENU */}
+          
           <div className="menu">
             <NavLink
               to="/dashboard"
@@ -177,9 +198,21 @@ function Sidebar({ collapsed, setCollapsed }) {
           </div>
         </div>
 
-        {/* BOTTOM */}
+       
         <div className="bottom">
-          {!collapsed && <div className="upload-box">⬆ Upload Files</div>}
+          <button className="settings-btn" onClick={toggleTheme}>
+            {theme === "dark" ? (
+              <>
+                <FiSun />
+                <span>Light Mode</span>
+              </>
+            ) : (
+              <>
+                <FiMoon />
+                <span>Dark Mode</span>
+              </>
+            )}
+          </button>
 
           <button className="logout-btn" onClick={handleLogout}>
             <FiLogOut />

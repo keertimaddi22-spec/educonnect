@@ -3,7 +3,6 @@ import Attendance from "../models/Attendance.js";
 
 const router = express.Router();
 
-// 📌 MARK ATTENDANCE (Student)
 router.post("/mark", async (req, res) => {
   try {
     const { student, date, status } = req.body;
@@ -30,7 +29,6 @@ router.post("/mark", async (req, res) => {
   }
 });
 
-// 📌 GET ALL ATTENDANCE (Teacher dashboard)
 router.get("/", async (req, res) => {
   try {
     const data = await Attendance.find();

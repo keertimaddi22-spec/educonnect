@@ -51,7 +51,6 @@ function ChannelChat() {
 
   return (
     <div className="chat-page">
-      {/* HEADER */}
       <div className="chat-header">
         <div className="back-circle" onClick={() => navigate(-1)}>
           <FiArrowLeft />
@@ -66,7 +65,6 @@ function ChannelChat() {
         </div>
       </div>
 
-      {/* BODY */}
       <div className="chat-body">
         {messages.map((m, i) => (
           <div key={i} className={`msg ${m.sender === user ? "own" : ""}`}>
@@ -81,7 +79,6 @@ function ChannelChat() {
         <div ref={bottomRef}></div>
       </div>
 
-      {/* INPUT */}
       <div className="chat-input">
         <input
           placeholder="Type message..."

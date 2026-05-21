@@ -12,7 +12,6 @@ function Home() {
   const [editId, setEditId] = useState(null); // 🔥 NEW
 
   const role = localStorage.getItem("role");
-  // 🔥 LOAD COURSES (NO DUPLICATE FIX)
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("courses"));
 
@@ -39,7 +38,6 @@ function Home() {
     }
   }, []);
 
-  // 🔥 SUBMIT (ADD + EDIT)
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -48,7 +46,6 @@ function Home() {
       return;
     }
 
-    // 👉 EDIT MODE
     if (editId) {
       const updated = courses.map((c) =>
         c.id === editId ? { ...c, title, description } : c,
@@ -57,7 +54,6 @@ function Home() {
       setCourses(updated);
       localStorage.setItem("courses", JSON.stringify(updated));
     } else {
-      // 👉 ADD MODE
       const newCourse = {
         id: Date.now().toString(),
         title,
@@ -71,21 +67,18 @@ function Home() {
       localStorage.setItem("courses", JSON.stringify(updated));
     }
 
-    // 🔥 RESET
     setTitle("");
     setDescription("");
     setEditId(null);
     setShowForm(false);
   };
 
-  // 🔥 DELETE
   const handleDelete = (id) => {
     const updated = courses.filter((c) => c.id !== id);
     setCourses(updated);
     localStorage.setItem("courses", JSON.stringify(updated));
   };
 
-  // 🔥 EDIT CLICK
   const handleEdit = (course) => {
     setShowForm(true);
     setEditId(course.id);
@@ -98,14 +91,12 @@ function Home() {
 <h1>
   Welcome {role === "teacher" ? "Teacher 👩‍🏫" : "Student 🎓"}
 </h1>
-      {/* ADD BUTTON */}
       {role === "teacher" && (
         <button className="add-btn" onClick={() => setShowForm(true)}>
           ➕ Add Course
         </button>
       )}
 
-      {/* FORM */}
       {showForm && (
         <div className="form-box">
           <form onSubmit={handleSubmit}>
@@ -143,7 +134,6 @@ function Home() {
         </div>
       )}
 
-      {/* COURSES */}
       <div className="course-list">
         {courses.map((course) => (
           <CourseCard

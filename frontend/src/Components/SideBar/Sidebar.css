@@ -15,7 +15,6 @@
 
   transition: all 0.3s ease;
 
-  /* FIX */
   z-index: 10;
 
   overflow-x: hidden;
@@ -186,14 +185,27 @@
   gap: 12px;
 }
 
-/* UPLOAD */
-.upload-box {
+/* SETTINGS */
+.settings-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
   padding: 12px;
-  border: 1px dashed #1e293b;
-  border-radius: 8px;
-  text-align: center;
-  font-size: 11px;
-  color: #94a3b8;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #1e293b;
+  color: white;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.settings-btn:hover {
+  background: #334155;
 }
 
 /* LOGOUT */
@@ -204,12 +216,14 @@
   gap: 8px;
 
   padding: 12px;
+
   border: none;
   border-radius: 10px;
+
   background: #ef4444;
   color: white;
-  cursor: pointer;
 
+  cursor: pointer;
   transition: 0.2s;
 }
 
@@ -221,7 +235,7 @@
 .sidebar.collapsed .profile-text,
 .sidebar.collapsed .menu span,
 .sidebar.collapsed .logout-btn span,
-.sidebar.collapsed .upload-box,
+.sidebar.collapsed .settings-btn span,
 .sidebar.collapsed .search-box,
 .sidebar.collapsed .dots {
   display: none;
@@ -230,7 +244,8 @@
 .sidebar.collapsed .top-bar,
 .sidebar.collapsed .profile,
 .sidebar.collapsed .menu a,
-.sidebar.collapsed .logout-btn {
+.sidebar.collapsed .logout-btn,
+.sidebar.collapsed .settings-btn {
   justify-content: center;
 }
 
@@ -238,8 +253,7 @@
   padding: 14px;
 }
 
-/* ================= MOBILE ================= */
-
+/* MOBILE */
 @media (max-width: 768px) {
   .sidebar {
     width: 72px;
@@ -255,7 +269,8 @@
   }
 
   .menu a,
-  .logout-btn {
+  .logout-btn,
+  .settings-btn {
     white-space: nowrap;
   }
 
@@ -263,9 +278,80 @@
     position: fixed;
     inset: 0;
     background: rgba(2, 6, 23, 0.6);
-    backdrop-filter: blur(5px);
-
-    /* FIX */
     z-index: 5;
   }
+}
+
+/* LIGHT MODE */
+
+body.light {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+body.light .main {
+  background: #f1f5f9;
+}
+
+body.light .sidebar {
+  background: white;
+  color: #0f172a;
+}
+
+body.light .menu a {
+  color: #334155;
+}
+
+body.light .menu a:hover {
+  background: #e2e8f0;
+}
+
+body.light .menu a.active {
+  color: white;
+}
+
+body.light .search-box input {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+body.light .settings-btn {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+body.light .settings-btn:hover {
+  background: #cbd5e1;
+}
+
+/* LIGHT MODE HEADINGS */
+
+body.light h1,
+body.light h2,
+body.light h3,
+body.light h4,
+body.light h5,
+body.light h6 {
+  color: #0f172a;
+}
+
+/* LIGHT MODE CARDS */
+
+body.light .course-card,
+body.light .assignment-card,
+body.light .student-channel-card,
+body.light .card,
+body.light .box {
+  background: white;
+  color: #0f172a;
+}
+
+/* KEEP BUTTONS & SPECIAL TEXT WHITE */
+
+body.light .menu a.active,
+body.light button,
+body.light title,
+body.light .logout-btn,
+body.light .settings-btn {
+  color: white;
 }

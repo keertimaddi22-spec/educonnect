@@ -5,15 +5,12 @@ import User from "../models/User.js";
 
 const router = express.Router();
 
-// =======================
-// REGISTER
-// =======================
+
 router.post("/register", async (req, res) => {
   console.log("REGISTER BODY 👉", req.body);
 
   const { name, email, password, role } = req.body;
 
-  // ✅ TEACHER EMAIL VALIDATION
   if (role === "teacher" && !email.endsWith("@teacher.com")) {
     return res.status(400).json({
       message: "Please check the Email and the Role selected",
@@ -21,14 +18,12 @@ router.post("/register", async (req, res) => {
   }
 
   try {
-    // ✅ EMPTY CHECK
     if (!name || !email || !password || !role) {
       return res.status(400).json({
         message: "All fields required ❌",
       });
     }
 
-    // ✅ DUPLICATE CHECK
     const exists = await User.findOne({ email });
 
     if (exists) {
@@ -37,10 +32,8 @@ router.post("/register", async (req, res) => {
       });
     }
 
-    // ✅ HASH PASSWORD
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // ✅ CREATE USER
     const user = await User.create({
       name,
       email,
@@ -61,16 +54,13 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// =======================
-// LOGIN
-// =======================
+
 router.post("/login", async (req, res) => {
   console.log("LOGIN BODY 👉", req.body);
 
   const { email, password } = req.body;
 
   try {
-    // ✅ FIND USER
     const user = await User.findOne({ email });
 
     if (!user) {
@@ -79,7 +69,6 @@ router.post("/login", async (req, res) => {
       });
     }
 
-    // ✅ CHECK PASSWORD
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
@@ -88,7 +77,6 @@ router.post("/login", async (req, res) => {
       });
     }
 
-    // ✅ JWT TOKEN
     const token = jwt.sign(
       {
         id: user._id,
@@ -100,7 +88,6 @@ router.post("/login", async (req, res) => {
       },
     );
 
-    // ✅ SUCCESS RESPONSE
     res.json({
       message: "Login success ✅",
       token,

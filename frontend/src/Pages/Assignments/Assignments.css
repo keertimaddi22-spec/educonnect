@@ -5,13 +5,13 @@
   z-index: 2;
 }
 
-/* HEADER */
+
 .page-header h2 {
   font-size: 32px;
   font-weight: 700;
 }
 
-/* ADD BUTTON */
+
 .add-assignment-btn {
   background: linear-gradient(135deg, #3b82f6, #2563eb);
   border: none;
@@ -24,7 +24,7 @@
   z-index: 1000;
 }
 
-/* TABS */
+
 .tabs {
   display: flex;
   gap: 10px;
@@ -45,7 +45,7 @@
   color: black;
 }
 
-/* FORM BOX */
+
 .form-box {
   background: #0f172a;
   padding: 20px;
@@ -71,7 +71,6 @@
   color: white;
 }
 
-/* BUTTON GROUP */
 .btn-group {
   display: flex;
   gap: 10px;
@@ -96,7 +95,7 @@
   cursor: pointer;
 }
 
-/* CARD */
+
 .assignment-card {
   background: #0f172a;
   border: 1px solid #1e293b;
@@ -116,7 +115,7 @@
   color: #94a3b8;
 }
 
-/* OPEN BUTTON */
+
 .open-btn {
   margin-top: 10px;
   background: #38bdf8;
@@ -126,7 +125,7 @@
   cursor: pointer;
 }
 
-/* DELETE */
+
 .delete-btn {
   background: #ef4444;
   border: none;
@@ -136,13 +135,12 @@
   cursor: pointer;
 }
 
-/* SUBMITTED */
+
 .submitted {
   color: #22c55e;
   margin-top: 10px;
 }
 
-/* MOBILE */
 @media (max-width: 768px) {
   .assignments {
     margin-left: 0;

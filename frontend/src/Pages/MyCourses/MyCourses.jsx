@@ -42,7 +42,6 @@ function MyCourses() {
         )}
       </div>
 
-      {/* 🔥 MODAL */}
       {selectedCourse && (
         <div className="modal-overlay">
           <div className="modal">

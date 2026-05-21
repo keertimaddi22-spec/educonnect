@@ -18,7 +18,7 @@ function Assignments() {
   const [selectedAssignment, setSelectedAssignment] = useState(null);
   const [answer, setAnswer] = useState("");
 
-  // FETCH
+  
   const fetchAssignments = async () => {
     try {
       const res = await fetch(
@@ -42,7 +42,6 @@ function Assignments() {
     setSubmissions(saved);
   }, []);
 
-  // ADD ASSIGNMENT
   const handleAdd = async (e) => {
     e.preventDefault();
 
@@ -79,7 +78,7 @@ function Assignments() {
     }
   };
 
-  // DELETE
+ 
   const handleDelete = async (id) => {
     try {
       await fetch(
@@ -95,7 +94,7 @@ function Assignments() {
     }
   };
 
-  // SUBMIT
+ 
   const handleSubmit = () => {
     if (!answer.trim()) return;
 
@@ -115,7 +114,7 @@ function Assignments() {
     setAnswer("");
   };
 
-  // FILTER
+  
   const filteredAssignments = assignments.filter((a) => {
     if (role === "teacher") return true;
 
@@ -147,7 +146,7 @@ function Assignments() {
         )}
       </div>
 
-      {/* STUDENT TABS */}
+     
       {role === "student" && (
         <div className="tabs">
           <button
@@ -166,7 +165,7 @@ function Assignments() {
         </div>
       )}
 
-      {/* CREATE FORM */}
+      
       {showForm && role === "teacher" && (
         <div
           className="assignment-popup-overlay"
@@ -210,7 +209,7 @@ function Assignments() {
         </div>
       )}
 
-      {/* SUBMIT FORM */}
+      
       {selectedAssignment && role === "student" && (
         <div
           className="assignment-popup-overlay"
@@ -253,7 +252,7 @@ function Assignments() {
         </div>
       )}
 
-      {/* ASSIGNMENTS */}
+      
       <div className="assignment-grid">
         {filteredAssignments.map((a) => (
           <div key={a._id} className="assignment-card">
@@ -274,7 +273,7 @@ function Assignments() {
               )}
             </div>
 
-            {/* STUDENT */}
+            
             {role === "student" &&
               !submissions.some(
                 (s) => s.assignmentId === a._id && s.student === user,

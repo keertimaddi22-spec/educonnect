@@ -1,4 +1,3 @@
-/* PAGE FIX */
 .student-dashboard,
 .page {
   width: 100%;
@@ -7,7 +6,6 @@
   padding: 18px;
 }
 
-/* HEADER */
 .student-header h1 {
   font-size: 24px;
   color: white;
@@ -17,7 +15,6 @@
   color: #94a3b8;
 }
 
-/* STATS */
 .student-stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -25,7 +22,6 @@
   margin-top: 25px;
 }
 
-/* CARDS */
 .student-card {
   background: #1e293b;
   padding: 18px;
@@ -34,7 +30,7 @@
 
 .student-card h2 {
   margin-top: 5px;
-  font-size: 22px; /* SAME SIZE */
+  font-size: 22px; 
   color: white;
 }
 
@@ -43,7 +39,6 @@
   font-size: 13px;
 }
 
-/* GRID */
 .student-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -51,7 +46,6 @@
   margin-top: 30px;
 }
 
-/* BOX */
 .student-box {
   background: #1e293b;
   padding: 20px;
@@ -63,7 +57,6 @@
   color: white;
 }
 
-/* ASSIGNMENTS */
 .assignment-item {
   background: #0f172a;
   padding: 10px;
@@ -101,7 +94,6 @@
   cursor: pointer;
 }
 
-/* RESPONSIVE */
 @media (max-width: 1024px) {
   .student-stats {
     grid-template-columns: repeat(2, 1fr);

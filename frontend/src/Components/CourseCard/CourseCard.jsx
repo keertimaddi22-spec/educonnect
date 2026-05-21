@@ -20,14 +20,14 @@ function CourseCard({ course, onDelete, onEdit, onView, isMyCourse }) {
         <h3>{course.title}</h3>
         <p>{course.description}</p>
 
-        {/* 👇 STUDENT */}
+      
         {role === "student" && (
           <button
             onClick={() => {
               if (isMyCourse) {
-                onView(course); // 🔥 modal open
+                onView(course); 
               } else {
-                navigate(`/course/${course._id}`); // 🔥 normal page
+                navigate(`/course/${course._id}`); 
               }
             }}
           >
@@ -35,7 +35,7 @@ function CourseCard({ course, onDelete, onEdit, onView, isMyCourse }) {
           </button>
         )}
 
-        {/* 👇 TEACHER */}
+       
         {role === "teacher" && (
           <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
             <button onClick={() => onEdit(course)}>✏ Edit</button>

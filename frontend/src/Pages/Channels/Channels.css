@@ -100,13 +100,12 @@
   font-size: 13px;
 }
 
-/* REJECT */
+
 .reject {
   background: #ef4444 !important;
 }
 
-/* POPUP */
-/* POPUP */
+
 .popup-overlay {
   position: fixed !important;
   inset: 0 !important;
@@ -176,16 +175,14 @@
   color: white;
 }
 
-/* ========================= */
-/* 📱 MOBILE RESPONSIVE */
-/* ========================= */
+
 
 @media (max-width: 768px) {
   .channels-page {
     padding: 14px;
   }
 
-  /* HEADER */
+  
   .channels-header {
     flex-direction: column;
     align-items: flex-start;
@@ -196,20 +193,19 @@
     margin: 0;
   }
 
-  /* BUTTON */
+  
   .channel-create-btn {
     width: 150px;
     height: 38px;
     font-size: 12px;
   }
 
-  /* GRID */
   .channel-grid {
     grid-template-columns: 1fr;
     gap: 16px;
   }
 
-  /* CARD */
+  
   .student-channel-card {
     padding: 16px;
   }
@@ -228,7 +224,7 @@
     padding: 8px;
   }
 
-  /* POPUP */
+  
   .popup-box {
     width: 92%;
     padding: 18px;

@@ -44,9 +44,7 @@ body,
   }
 }
 
-/* =========================
-   EDUCONNECT TRANSITION (RESTORED)
-========================= */
+
 .app-name {
   font-size: 55px;
   margin-bottom: 25px;
@@ -73,9 +71,7 @@ body,
   }
 }
 
-/* =========================
-   MAIN BOX (CLEAN FIX)
-========================= */
+
 .login-box,
 .signup-box {
   display: flex;
@@ -91,9 +87,7 @@ body,
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
 }
 
-/* =========================
-   LEFT IMAGE AREA (FIXED BIG + CLEAN)
-========================= */
+
 .login-image,
 .signup-image {
   width: 40%;
@@ -106,13 +100,13 @@ body,
   background: rgba(0, 0, 0, 0.18);
 }
 
-/* AVATAR (FONT AWESOME READY) */
+
 .avatar {
   width: 140px;
   height: 140px;
   border-radius: 50% !important;
 
-  background: none !important; /* 🔥 force remove */
+  background: none !important; 
   background-color: transparent !important;
 
   display: flex;
@@ -126,9 +120,7 @@ body,
   border: none !important;
 }
 
-/* =========================
-   RIGHT FORM
-========================= */
+
 .login-form,
 .signup-form {
   width: 60%;
@@ -142,7 +134,7 @@ body,
   color: white;
 }
 
-/* INPUTS */
+
 .login-form input,
 .signup-form input {
   width: 100%;
@@ -155,7 +147,7 @@ body,
   font-size: 14px;
 }
 
-/* BUTTON */
+
 .login-form button,
 .signup-form button {
   padding: 12px;
@@ -175,9 +167,7 @@ body,
   transform: translateY(-2px);
 }
 
-/* =========================
-   ROLE BUTTONS (REGISTER FIX)
-========================= */
+
 .role-buttons {
   display: flex;
   gap: 12px;
@@ -212,7 +202,7 @@ body,
 }
 .auth-link {
   color: #38bdf8;
-  cursor: pointer; /* 🔥 hand cursor */
+  cursor: pointer;
   font-weight: 500;
   text-decoration: none;
 }
@@ -222,9 +212,7 @@ body,
   opacity: 0.9;
 }
 
-/* =========================
-   MOBILE FIX ONLY (SAFE)
-========================= */
+
 @media (max-width: 768px) {
   .login-box,
   .signup-box {

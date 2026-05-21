@@ -12,7 +12,6 @@ function TeacherAssignments() {
 
   const [selectedAssignment, setSelectedAssignment] = useState(null);
 
-  // FETCH
   const fetchAssignments = () => {
     fetch("https://educonnect-q5og.onrender.com/api/assignments")
       .then((res) => res.json())
@@ -25,7 +24,6 @@ function TeacherAssignments() {
     fetchAssignments();
   }, []);
 
-  // CREATE
   const handleCreate = async (e) => {
     e.preventDefault();
 
@@ -51,7 +49,6 @@ function TeacherAssignments() {
     fetchAssignments();
   };
 
-  // DELETE
   const handleDelete = async (id) => {
     await fetch(`https://educonnect-q5og.onrender.com/api/assignments/${id}`, {
       method: "DELETE",
@@ -60,7 +57,6 @@ function TeacherAssignments() {
     fetchAssignments();
   };
 
-  // RETURN
   const handleReturn = async (assignmentId, student) => {
     await fetch(
       `https://educonnect-q5og.onrender.com/api/assignments/return/${assignmentId}`,
@@ -103,7 +99,6 @@ function TeacherAssignments() {
         </button>
       </div>
 
-      {/* CREATE FORM */}
       {showForm && (
         <div className="teacher-modal-overlay">
           <form className="teacher-form" onSubmit={handleCreate}>
@@ -133,7 +128,6 @@ function TeacherAssignments() {
         </div>
       )}
 
-      {/* GRID */}
       <div className="teacher-assignment-grid">
         {assignments.map((a) => (
           <div key={a._id} className="teacher-assignment-card">
@@ -181,11 +175,9 @@ function TeacherAssignments() {
         ))}
       </div>
 
-      {/* DETAILS MODAL */}
       {selectedAssignment && (
         <div className="teacher-modal-overlay">
           <div className="teacher-details-modal">
-            {/* HEADER */}
             <div className="teacher-details-header">
               <div>
                 <h2>{selectedAssignment.title}</h2>
@@ -195,9 +187,7 @@ function TeacherAssignments() {
               <button onClick={() => setSelectedAssignment(null)}>✖</button>
             </div>
 
-            {/* COLUMNS */}
             <div className="modal-columns">
-              {/* SUBMISSIONS */}
               <div className="column">
                 <div className="column-header">
                   <h3>Submissions</h3>
@@ -238,7 +228,6 @@ function TeacherAssignments() {
                 ).length === 0 && <p className="empty">No submissions</p>}
               </div>
 
-              {/* RETURNED */}
               <div className="column">
                 <div className="column-header">
                   <h3>Returned</h3>

@@ -4,7 +4,6 @@ import Course from "../models/Course.js";
 const router = express.Router();
 
 
-// ✅ GET ALL COURSES
 router.get("/", async (req, res) => {
   try {
     const courses = await Course.find();
@@ -15,7 +14,6 @@ router.get("/", async (req, res) => {
 });
 
 
-// ✅ GET SINGLE COURSE
 router.get("/:id", async (req, res) => {
   try {
     const course = await Course.findById(req.params.id);
@@ -26,14 +24,13 @@ router.get("/:id", async (req, res) => {
 });
 
 
-// ✅ CREATE COURSE (IMPORTANT FIX)
 router.post("/create", async (req, res) => {
   try {
     const course = new Course({
       title: req.body.title,
       description: req.body.description,
       image: req.body.image,
-      createdBy: req.body.instructor, // 🔥 FIXED
+      createdBy: req.body.instructor, 
       students: [],
     });
 
@@ -45,7 +42,6 @@ router.post("/create", async (req, res) => {
 });
 
 
-// ✅ ENROLL COURSE
 router.post("/enroll/:id", async (req, res) => {
   try {
     const { user } = req.body;
@@ -56,7 +52,6 @@ router.post("/enroll/:id", async (req, res) => {
       return res.status(404).json({ error: "Course not found" });
     }
 
-    // avoid duplicate
     if (!course.students.includes(user)) {
       course.students.push(user);
       await course.save();
@@ -69,7 +64,6 @@ router.post("/enroll/:id", async (req, res) => {
 });
 
 
-// ✅ DELETE
 router.delete("/:id", async (req, res) => {
   try {
     await Course.findByIdAndDelete(req.params.id);
@@ -80,7 +74,6 @@ router.delete("/:id", async (req, res) => {
 });
 
 
-// ✅ UPDATE
 router.put("/:id", async (req, res) => {
   try {
     const updated = await Course.findByIdAndUpdate(

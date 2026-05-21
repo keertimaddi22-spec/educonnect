@@ -11,23 +11,18 @@ import {
 const router = express.Router();
 
 
-// ✅ GET
 router.get("/", getAssignments);
 
 
-// ✅ CREATE
 router.post("/", createAssignment);
 
 
-// ✅ DELETE
 router.delete("/:id", deleteAssignment);
 
 
-// ✅ SUBMIT
 router.post("/submit/:id", submitAssignment);
 
 
-// ✅ RETURN
 router.put("/return/:id", returnAssignment);
 
 

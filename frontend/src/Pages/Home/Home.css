@@ -20,7 +20,7 @@
   }
 }
 
-/* HEADER */
+
 .header h1 {
   font-size: 34px;
   text-shadow: 0 0 10px rgba(124, 131, 253, 0.8);
@@ -31,7 +31,7 @@
   margin-bottom: 30px;
 }
 
-/* TOP CARDS */
+
 .top-cards {
   display: flex;
   gap: 20px;
@@ -75,25 +75,24 @@
   box-shadow: 0 0 30px rgba(124, 131, 253, 0.6);
 }
 
-/* ICON FEEL */
+
 .top-card h3 {
   margin-bottom: 10px;
 }
 
-/* SECTION */
+
 .section-title {
   margin-bottom: 20px;
   font-size: 22px;
 }
 
-/* COURSE GRID */
 .course-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 25px;
 }
 
-/* COURSE CARD GLASS */
+
 .course-card {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
@@ -115,7 +114,7 @@
   margin-top: 20px;
 }
 
-/* ADD BUTTON */
+
 .add-btn {
   margin: 15px 0;
   padding: 10px 15px;
@@ -126,7 +125,6 @@
   cursor: pointer;
 }
 
-/* FORM */
 .add-form {
   display: flex;
   gap: 10px;
@@ -147,7 +145,6 @@
   cursor: pointer;
 }
 
-/* ADD BUTTON */
 .add-btn {
   margin: 15px 0;
   padding: 10px 15px;
@@ -158,7 +155,6 @@
   cursor: pointer;
 }
 
-/* FORM */
 .add-form {
   display: flex;
   gap: 10px;
@@ -179,12 +175,10 @@
   cursor: pointer;
 }
 
-/* COURSE WRAPPER */
 .course-wrapper {
   margin-bottom: 20px;
 }
 
-/* ADMIN BUTTONS */
 .admin-buttons {
   display: flex;
   gap: 10px;
@@ -198,12 +192,10 @@
   cursor: pointer;
 }
 
-/* EDIT */
 .admin-buttons button:first-child {
   background: #facc15;
 }
 
-/* DELETE */
 .admin-buttons button:last-child {
   background: #ef4444;
   color: white;
@@ -221,7 +213,7 @@
   justify-content: center;
   align-items: center;
 
-  z-index: 9999; /* 🔥 ADD THIS */
+  z-index: 9999; 
 }
 
 .form-box form {

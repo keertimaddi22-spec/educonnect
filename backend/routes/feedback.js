@@ -3,7 +3,6 @@ import Feedback from "../models/Feedback.js";
 
 const router = express.Router();
 
-// CREATE FEEDBACK
 router.post("/add", async (req, res) => {
   try {
     const { user, courseId, message, rating } = req.body;
@@ -21,7 +20,6 @@ router.post("/add", async (req, res) => {
   }
 });
 
-// GET ALL FEEDBACK
 router.get("/", async (req, res) => {
   try {
     const data = await Feedback.find().sort({ createdAt: -1 });

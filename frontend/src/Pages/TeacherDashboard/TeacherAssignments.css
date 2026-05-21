@@ -307,7 +307,6 @@
   }
 }
 
-/* MODAL COLUMNS */
 .modal-columns {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -315,7 +314,6 @@
   margin-top: 20px;
 }
 
-/* COLUMN */
 .column {
   background: #0f172a;
   border: 1px solid #1e293b;
@@ -325,7 +323,6 @@
   overflow-y: auto;
 }
 
-/* COLUMN HEADER */
 .column-header {
   display: flex;
   justify-content: space-between;
@@ -339,7 +336,6 @@
   font-size: 18px;
 }
 
-/* RIGHT SIDE SMALL NUMBER */
 .count {
   width: 28px;
   height: 28px;
@@ -357,7 +353,6 @@
   color: #22c55e;
 }
 
-/* ROW */
 .submission-row {
   background: #111827;
   border-radius: 12px;
@@ -370,20 +365,17 @@
   gap: 14px;
 }
 
-/* RETURNED ROW */
 .submission-row.returned {
   border: 1px solid #14532d;
   background: rgba(34, 197, 94, 0.08);
 }
 
-/* LEFT SIDE */
 .left {
   display: flex;
   gap: 10px;
   flex: 1;
 }
 
-/* NUMBER */
 .index {
   color: #38bdf8;
   font-weight: 700;
@@ -391,7 +383,6 @@
   margin-top: 2px;
 }
 
-/* STUDENT NAME */
 .student {
   color: white;
   margin: 0;
@@ -399,7 +390,6 @@
   font-weight: 600;
 }
 
-/* ANSWER */
 .answer {
   color: #94a3b8;
   margin-top: 4px;
@@ -407,7 +397,6 @@
   line-height: 1.4;
 }
 
-/* RETURN BUTTON */
 .return-btn {
   background: #22c55e;
   border: none;
@@ -419,7 +408,6 @@
   font-weight: 600;
 }
 
-/* RETURNED BADGE */
 .returned-badge {
   background: rgba(34, 197, 94, 0.15);
   color: #22c55e;
@@ -429,7 +417,6 @@
   font-weight: 600;
 }
 
-/* EMPTY TEXT */
 .empty {
   text-align: center;
   color: #64748b;
@@ -437,7 +424,6 @@
   font-size: 14px;
 }
 
-/* MOBILE */
 @media (max-width: 768px) {
   .modal-columns {
     grid-template-columns: 1fr;

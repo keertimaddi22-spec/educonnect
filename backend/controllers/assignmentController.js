@@ -1,7 +1,7 @@
 import Assignment from "../models/Assignment.js";
 
 
-// ✅ GET ALL
+
 export const getAssignments = async (req, res) => {
   try {
     const assignments = await Assignment.find();
@@ -15,7 +15,7 @@ export const getAssignments = async (req, res) => {
 };
 
 
-// ✅ CREATE
+
 export const createAssignment = async (req, res) => {
   try {
     const { title, dueDate } = req.body;
@@ -37,7 +37,7 @@ export const createAssignment = async (req, res) => {
 };
 
 
-// ✅ DELETE
+
 export const deleteAssignment = async (req, res) => {
   try {
     await Assignment.findByIdAndDelete(req.params.id);
@@ -53,7 +53,7 @@ export const deleteAssignment = async (req, res) => {
 };
 
 
-// ✅ SUBMIT
+
 export const submitAssignment = async (req, res) => {
   try {
     const { student, answer } = req.body;
@@ -94,7 +94,7 @@ export const submitAssignment = async (req, res) => {
 };
 
 
-// ✅ RETURN
+
 export const returnAssignment = async (req, res) => {
   try {
     const { student } = req.body;

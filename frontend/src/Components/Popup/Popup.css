@@ -19,7 +19,7 @@ body {
   justify-content: center;
   align-items: center;
 
-  z-index: 9999; /* 🔥 THIS FIXES YOUR ISSUE */
+  z-index: 9999; 
 }
 
 .popup-box {
@@ -51,7 +51,7 @@ body {
   cursor: pointer;
 }
 
-/* ANIMATION */
+
 @keyframes popIn {
   from {
     transform: scale(0.7);

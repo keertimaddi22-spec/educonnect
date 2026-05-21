@@ -9,7 +9,7 @@ const courseSchema = new mongoose.Schema(
 
     students: [
       {
-        type: String, // 🔥 IMPORTANT
+        type: String, 
       },
     ],
   },

@@ -47,11 +47,9 @@ function Layout() {
         ${collapsed ? "collapsed-main" : ""}`}
       >
         <Routes>
-          {/* AUTH */}
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
-          {/* DASHBOARD */}
           <Route
             path="/dashboard"
             element={
@@ -65,7 +63,6 @@ function Layout() {
             }
           />
 
-          {/* COURSES */}
           <Route
             path="/courses"
             element={
@@ -93,7 +90,6 @@ function Layout() {
             }
           />
 
-          {/* ASSIGNMENTS */}
           <Route
             path="/assignments"
             element={
@@ -107,7 +103,6 @@ function Layout() {
             }
           />
 
-          {/* CHANNELS */}
           <Route
             path="/channels"
             element={
@@ -126,7 +121,6 @@ function Layout() {
             }
           />
 
-          {/* ATTENDANCE */}
           <Route
             path="/attendance"
             element={

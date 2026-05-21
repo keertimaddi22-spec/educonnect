@@ -15,7 +15,7 @@ const channelSchema = new mongoose.Schema({
       student: String,
       status: {
         type: String,
-        default: "pending", // pending | approved | rejected
+        default: "pending", 
       },
     },
   ],

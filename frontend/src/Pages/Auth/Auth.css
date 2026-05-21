@@ -14,9 +14,7 @@ body,
 #root {
   height: 100%;
 }
-/* =========================
-   BACKGROUND (UNCHANGED)
-========================= */
+
 .login-wrapper,
 .signup-wrapper {
   height: 100dvh;
